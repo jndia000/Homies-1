@@ -1,0 +1,13 @@
+aiofiles
+bcrypt
+cryptography
+fastapi
+fastapi-mail
+jinja2
+mysql-connector-python
+passlib
+python-dotenv
+python-jose
+python-multipart
+sqlalchemy
+uvicorn

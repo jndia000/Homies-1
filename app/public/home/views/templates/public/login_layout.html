@@ -1,0 +1,16 @@
+{% include "templates/public/header.html" %}
+
+<body class="hold-transition login-page bg-white">
+    {% block content %}{% endblock %}
+    
+    {# Page Modals #}
+    {% block modals %}{% endblock %}
+
+    {# Plugin Scripts #}
+    {% include 'templates/public/scripts.html' %}
+
+    {# Custom-Defined Scripts #}
+    {% block scripts %}{% endblock %}
+</body>
+
+{% include "templates/public/footer.html" %}

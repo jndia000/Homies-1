@@ -1,0 +1,28 @@
+{% include 'templates/public/header.html' %}
+
+<body class="layout-top-nav control-sidebar-slide-open layout-navbar-fixed">
+    <div class="wrapper">
+
+        {# Topbar #}
+        {% include 'templates/public/components/topbar.html' %}
+        
+        {# Content Wrapper#}
+        <div class="content-wrapper pb-5">
+            {% block content %}{% endblock %}
+        </div>
+
+        {# Footer #}
+        {% include 'templates/public/components/footer_section.html' %}
+    </div>
+
+    {# Page Modals #}
+    {% block modals %}{% endblock %}
+
+    {# Plugin Scripts #}
+    {% include 'templates/public/scripts.html' %}
+
+    {# Custom-Defined Scripts #}
+    {% block scripts %}{% endblock %}
+</body>
+
+{% include 'templates/public/footer.html' %}
