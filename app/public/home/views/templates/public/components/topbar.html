@@ -25,84 +25,90 @@
         {# Left Navbar Links #}
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
-
-                {# Medical Services #}
+                <!-- Medical Services -->
                 <li class="nav-item dropdown">
-                    <a 
-                        id="dropdownSubMenu1" 
-                        href="#" 
+                    <a
+                        id="dropdownSubMenu1"
+                        href="#"
                         data-toggle="dropdown"
                         class="nav-link dropdown-toggle"
-                    >Medical Services</a>
+                        >Medical Services</a
+                    >
 
                     <ul class="dropdown-menu border-0 shadow">
                         <li><a href="#" class="dropdown-item">Find a Doctor</a></li>
                     </ul>
                 </li>
 
-                {# Patient & Visitor #}
-                <li class="nav-item dropdown">
-                    <a 
-                        id="dropdownSubMenu1" 
-                        href="#" 
-                        data-toggle="dropdown" 
-                        aria-haspopup="true" 
-                        aria-expanded="false" 
-                        class="nav-link dropdown-toggle"
-                    >Patients & Visitor</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                    <li><a href="#" class="dropdown-item">Some action </a></li>
-                    <li><a href="#" class="dropdown-item">Some other action</a></li>
-
-                    <li class="dropdown-divider"></li>
-
-                    {# Level two dropdown#}
-                    <li class="dropdown-submenu dropdown-hover">
-                        <a id="dropdownSubMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-
-                        {# Level three dropdown#}
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                </li>
-
-                {# Careers #}
-                <li class="nav-item">
-                    <a href="./careers" class="nav-link">Careers</a>
-                </li>
-                
-                {# About Us #}
+                <!-- Patient & Visitor -->
                 <li class="nav-item dropdown">
                     <a
-                        role="button"
+                        id="dropdownSubMenu1"
+                        href="#"
                         data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                         class="nav-link dropdown-toggle"
-                    >About Us</a>
-
+                        >Patients & Visitors</a
+                    >
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">Vision & Mission</a></li>
-                        <li><a href="#" class="dropdown-item">History</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-item">Data Privacy</a></li>
-                        <li><a href="#" class="dropdown-item">Terms and Conditions</a></li>
-                        <li><a href="#" class="dropdown-item">FAQ</a></li>
+                        <h5 class="dropdown-header">Patients</h5>
+                        <li><a href="#" class="dropdown-item">Teleconsult</a></li>
+                        <h5 class="dropdown-header">Visitors</h5>
+                        <li>
+                            <a href="/vms/visitor" class="dropdown-item">
+                            Visitor Portal
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/vms/visiting_schedule" class="dropdown-item {{ 'active' if page == 'visiting_schedule' }}">Visiting Schedules</a>
+                        </li>
+                        <li>
+                            <a href="/vms/visiting_procedures" class="dropdown-item {{ 'active' if page == 'visiting_procedures' }}">
+                                Visiting Procedures
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/vms/visiting_policies_requirements"
+                                class="dropdown-item {{ 'active' if page == 'visiting_policies_requirements' }}">
+                                Visiting Policies and Requirements
+                            </a>
+                        </li>
+                        
+                        <!-- End Level two -->
                     </ul>
                 </li>
 
+                <!-- Careers -->
+                <li class="nav-item">
+                    <a href="#careers" class="nav-link">Careers</a>
+                </li>
+
+                <!-- About Us -->
+                <li class="nav-item dropdown">
+                    <div
+                        role="button"
+                        data-toggle="dropdown"
+                        class="nav-link dropdown-toggle"
+                    >
+                        About Us
+                    </div>
+                    <ul
+                        aria-labelledby="dropdownSubMenu1"
+                        class="dropdown-menu border-0 shadow"
+                    >
+                        <li>
+                            <a href="#" class="dropdown-item">Vision & Mission</a>
+                        </li>
+                        <li><a href="#" class="dropdown-item">History</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="#" class="dropdown-item">Data Privacy</a></li>
+                        <li>
+                            <a href="#" class="dropdown-item">Terms and Conditions</a>
+                        </li>
+                        <li><a href="#" class="dropdown-item">FAQ</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 
