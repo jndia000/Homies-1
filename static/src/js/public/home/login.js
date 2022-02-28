@@ -53,7 +53,7 @@ const loginAJAX = () => {
     
     // Call ajax
     $.ajax({
-        url: `/public/api/auth/login?remember=${$('#remember').is(':checked')}`,
+        url: `/api/auth/login?remember=${ $('#remember').is(':checked') }`,
         type: 'POST',
         data: {
             username: fd.get('email'),

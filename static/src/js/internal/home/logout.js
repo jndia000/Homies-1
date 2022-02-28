@@ -25,13 +25,13 @@ $('#logoutBtn').on('click', () => {
     }
 
     // Logout
-    GET_ajax(`/public/api/auth/logout`, {
+    GET_ajax(`/api/auth/logout`, {
         success: result => {
             if(result.status === "Success") {
                 toastr.info(result.message);
                 localStorage.clear();
                 sessionStorage.clear();
-                location.assign(`/public/login`)
+                location.assign(`/login`)
             } else err()
         },
         error: () => err()

@@ -18,9 +18,8 @@ RMS = FastAPI()
 # * Web Routers
 # ============================================================
 
-
 # * Human Resource
-# Recruitment
+# ? Recruitment
 from app.internal.human_resource.recruitment.routers.web \
     import redirectRouter, deptHeadRouter, deptMngrRouter, hireMngrRoute, recruiterRoute
 RMS.include_router(redirectRouter.router)

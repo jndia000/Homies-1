@@ -23,7 +23,7 @@ def login(
     req: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
-    
+
     # Get user credentials
     user_credentials = db.query(InternalUser).filter(
         InternalUser.email == req.username
@@ -70,7 +70,13 @@ def login(
     # Setup access token
     access_token = generate_token(data = token_data, remember=remember)
 
-    res.set_cookie(key = "access_token", value = access_token, httponly = True, max_age = 31536000 if remember else None)
+    # Set Cookies
+    res.set_cookie(
+        key = "access_token", 
+        value = access_token, 
+        httponly = True, 
+        max_age = 31536000 if remember else None
+    )
     res.set_cookie(key = "roles", value = roles, httponly = True)
     
     return { 

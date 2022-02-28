@@ -17,16 +17,22 @@ template = Jinja2Templates(directory = "app/internal/human_resource/recruitment/
 router = APIRouter(prefix="/h")
 
 
+# Check if authorized
 def isAuthorized(user_data):
     userRoles = user_data["roles"]
     return "Recruitment" in userRoles and userRoles["Recruitment"] == "Hiring Manager"
+
+
+# ===========================================================
+# * WEB ROUTES
+# ===========================================================
 
 
 # Redirect
 @router.get("/")
 def home(req: Request, user_data: dict = Depends(get_token)):
     if(isAuthorized(user_data)):
-        return RedirectResponse("/h/dashboard")
+        return RedirectResponse("/rms/h/dashboard")
     return "page not found"
 
 

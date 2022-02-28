@@ -5,9 +5,9 @@ from fastapi.staticfiles import StaticFiles as sf
 
 
 # To create tables
-import models
-from database import engine
-models.Base.metadata.create_all(bind=engine)
+# import models
+# from database import engine
+# models.Base.metadata.create_all(bind=engine)
 
 
 # App Instance
@@ -25,27 +25,38 @@ app.mount('/src'    , sf(directory='static/src')    , name='src')
 # * Import Internal Routes
 # =================================================================
 
+# ? Internal Home
 from app.internal.app import internalApp
 app.mount('/internal', internalApp)
 
-#? Recruitment
+
+# ! HOSPITAL CORE
+
+# ? Visitors
+from app.internal.core.visitors.app import VMS
+app.mount('/vms', VMS)
+
+
+# ! HUMAN RESOURCE
+
+# ? Recruitment
 from app.internal.human_resource.recruitment.app import RMS
 app.mount('/rms', RMS)
 
-#? Visitors
-from app.internal.core.visitors.app import VMS
-app.mount('/vms', VMS)
 
 # =================================================================
 # * Import Test Routes
 # =================================================================
 
+# ? This will remove after everything will be okay
 from app.test.app import testApp
 app.mount('/test', testApp)
+
 
 # =================================================================
 # * Import Public Routes
 # =================================================================
-#? last dapat to kasi masasalo lahat HAHAHAH
+
+# ? Public
 from app.public.app import publicApp
 app.mount('/', publicApp)

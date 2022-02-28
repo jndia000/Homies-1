@@ -14,16 +14,19 @@ template = Jinja2Templates(directory = "app/internal/human_resource/views")
 
 
 # Router
-router = APIRouter(prefix="/recruitment")
+router = APIRouter()
 
 
 # ===========================================================
-# WEB ROUTES
+# * WEB ROUTES
 # ===========================================================
+
 
 # Redirect
 @router.get("/")
 def home(req: Request, user_data: dict = Depends(get_token)):
+
+    # Redirect Path if /rms is loaded
     redirectPath = {
         "Department Head"   : "/dh",
         "Department Manager": "/dm",
@@ -31,9 +34,12 @@ def home(req: Request, user_data: dict = Depends(get_token)):
         "Talent Recruiter"  : "/r",
     }
 
+    # Get the user roles
     userRoles = user_data["roles"]
 
+    # Check if there is Recruitment with Role
     if "Recruitment" not in userRoles and userRoles["Recruitment"] not in redirectPath:
-        return "page not found (2)"
+        return "page not found"
 
+    # Redirect to a correct path
     return RedirectResponse("/rms" + redirectPath[userRoles["Recruitment"]])
