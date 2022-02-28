@@ -1,7 +1,7 @@
 <aside class="main-sidebar main-sidebar-custom sidebar-light-primary">
 
     <!-- Brand Logo -->
-    <a href="./home" class="brand-link">
+    <a href="/internal/home" class="brand-link">
         <img src="{{url_for('dist', path='/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
             class="brand-image img-circle border" style="opacity: .8">
         <span class="brand-text font-weight-light">HoMIES</span>
@@ -15,7 +15,7 @@
 
             <!-- User Image -->
             <div class="image">
-                <img src="{{BASE_URL_WEB}}static/dist/img/user2-160x160.jpg" class="img-circle border" alt="User Image">
+                <img src="{{url_for('dist', path='/img/user2-160x160.jpg')}}" class="img-circle border" alt="User Image">
             </div>
 
             <!-- User Full Name -->

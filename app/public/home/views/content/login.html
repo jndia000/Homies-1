@@ -1,9 +1,17 @@
 {% extends 'templates/public/login_layout.html' %}
 
+
 {% block content %}
 <div class="login-box">
     <div class="login-logo">
-        <div class="">HoMIES</div>
+        <img 
+            src="{{url_for('dist', path='/img/AdminLTELogo.png')}}" 
+            alt="AdminLTE Logo" 
+            class="brand-image img-circle"
+            style="opacity:.8"
+            height="75px"
+        >
+        <div>HoMIES</div>
     </div>
 
     <div class="card shadow-none">
@@ -17,7 +25,13 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <div class="input-group">
-                        <input type="email" id="email" class="form-control" name="email" placeholder="Email">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-control" 
+                            name="email" 
+                            placeholder="Type your email here"
+                        >
                         <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -28,12 +42,18 @@
 
                 {# Password #}
                 <div class="form-group">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-start justify-content-between">
                         <label for="password">Password</label>
-                        <a class="mb-3" href="#">I forgot my password</a>
+                        <a class="mb-3 small" href="/login/forgot-password">I forgot my password</a>
                     </div>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Type your password here"
+                        >
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -43,14 +63,14 @@
                 </div>
 
                 {# User Actions #}
-                <div class="row">
-                    <div class="col-8">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
                             <label for="remember">Remember Me</label>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div>
                         <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
                             <span>Log in</span>
                             <i class="fas fa-sign-in-alt ml-1"></i>
@@ -63,12 +83,12 @@
 
             <div class="d-flex justify-content-between text-sm">
                 <div>
-                    <a href="{{BASE_URL_WEB}}">Home</a>
+                    <a href="/public">Home</a>
                 </div>
                 <div>
-                    <a href="#">About Us</a>
+                    <a href="/public/about-us">About Us</a>
                     <span class="text-secondary">&middot;</span>
-                    <a href="#">Terms and Policies</a>
+                    <a href="/public/terms-and-policies">Terms and Policies</a>
                 </div>
             </div>
 
@@ -76,6 +96,7 @@
     </div>
 </div>
 {% endblock %}
+
 
 {% block scripts %}
 <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/constants.min.js')}}"></script>

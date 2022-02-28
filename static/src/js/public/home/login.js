@@ -21,59 +21,66 @@ validateForm("#loginForm", {
         }
     },
     submitHandler: () => loginAJAX()
-})
+});
 
+/** Login */
 const loginAJAX = () => {
-    btnToLoadingState('#loginBtn');
-    disableElement('#loginBtn');
 
-    const formData = generateFormData('#loginForm');
+    // Generate Form Data
+    // Important: form data first before disabling elements
+    const fd = generateFormData('#loginForm');
     
-    const data = {
-        username: formData.get('email'),
-        password: formData.get('password')
-    }
-    
+    // Set elements to loading states
+    btnToLoadingState('#loginBtn');
     disableElement('#email');
     disableElement('#password');
+
+    // Configure toast options
+    toastr.options = {
+        "preventDuplicates": true,
+        "positionClass": "mt-3 toast-top-center",
+        "showDuration": "3000"
+    }
+
+    // If error
+    const err = () => {
+
+        // Set elements to unload state
+        btnToUnloadState('#loginBtn', TEMPLATE.LABEL_ICON('Log in', 'sign-in-alt'));
+        enableElement('#email');
+        enableElement('#password');
+    }
     
+    // Call ajax
     $.ajax({
-        url: `${ BASE_URL_API }auth/login`,
+        url: `/public/api/auth/login`,
         type: 'POST',
-        data: data,
+        data: {
+            username: fd.get('email'),
+            password: fd.get('password')
+        },
         dataType: 'json',
         success: result => {
             if(result.authorized) {
-                localStorage.setItem("access_token", result.access_token);
 
-                toastr.options = {
-                    "preventDuplicates": true,
-                    "positionClass": "mt-3 toast-top-center",
-                    "showDuration": "3000"
-                }
+                // Store access token to localStorage
+                localStorage.setItem("access_token", result.access_token);
+                
+                // Show Success Alert
                 toastr.success("Log in was successful!");
 
-                location.assign(`${ BASE_URL_WEB }redirect`);
+                // Redirect to a page
+                location.assign('/internal/home');
             } else {
-                toastr.options = {
-                    "preventDuplicates": true,
-                    "positionClass": "mt-3 toast-top-center",
-                    "showDuration": "3000"
-                }
+                err();
                 toastr.warning(result.message);
-                setContent('#loginBtn', TEMPLATE.LABEL_ICON('Log in', 'sign-in-alt'));
-                enableElement('#loginBtn');
-
-                enableElement('#email');
-                enableElement('#password');
             }
         },
     }).fail(() => {
-        toastr.options = {
-            "preventDuplicates": true,
-            "positionClass": "toast-top-center",
-            "showDuration": "3000"
-        }
-        toastr.danger("There was a problem in logging in. Please try again later")
+        err();
+        toastr.danger("There was a problem in logging. Please try again later")
     });
+
+    // Return false to prevent default submitting form
+    return false;
 }

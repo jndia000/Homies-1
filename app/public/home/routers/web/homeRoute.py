@@ -14,22 +14,21 @@ template = Jinja2Templates(directory = "app/public/home/views")
 
 
 # Router
-router = APIRouter(
-    tags = ["Authentication Web Route"]
-)
+router = APIRouter(tags = ["Authentication Web Route"])
 
 
 # Home Page
 @router.get("/")
-def home(req: Request, page: Optional[int] = None):
+def home(req: Request):
     return template.TemplateResponse("content/home.html", {
         "request": req,
         "page_title": "Welcome to HOMIES!"
     })
 
+
 # Login Page
 @router.get("/login")
-def home(req: Request, page: Optional[int] = None):
+def home(req: Request):
     return template.TemplateResponse("content/login.html", {
         "request": req,
         "page_title": "Login"

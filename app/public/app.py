@@ -7,11 +7,12 @@ publicApp = FastAPI()
 
 
 # ============================================================
-# * API Router
+# * API Routers
 # ============================================================
 
-# Import API Routers
-### none yet
+# * Home Routers
+from app.public.home.routers.api import authRoute
+publicApp.include_router(authRoute.router)
 
 
 
@@ -19,6 +20,6 @@ publicApp = FastAPI()
 # * Web Routers
 # ============================================================
 
-# Import Web Routers
+# * Home Routers
 from app.public.home.routers.web import homeRoute
 publicApp.include_router(homeRoute.router)

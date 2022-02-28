@@ -1,7 +1,7 @@
 # Import Packages
 from fastapi import Cookie, HTTPException
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import Dict, Optional
 from jose import JWTError, jwt
 from pydantic import BaseModel
 
@@ -9,8 +9,7 @@ from pydantic import BaseModel
 # Token Data
 class TokenData(BaseModel):
     user_id: str
-    employee_id: str
-    roles: List[str]
+    roles: Dict[str,str]
 
 
 # Constants
