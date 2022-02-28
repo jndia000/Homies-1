@@ -18,8 +18,9 @@ router = APIRouter(prefix = "/api/auth", tags = ["Authentication API"])
 # Login
 @router.post("/login")
 def login(
+    remember: bool,
     res: Response, 
-    req: OAuth2PasswordRequestForm = Depends(), 
+    req: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
     
@@ -67,8 +68,9 @@ def login(
     }
 
     # Setup access token
-    access_token = generate_token(data = token_data)
-    res.set_cookie(key = "access_token", value = access_token, httponly = True)
+    access_token = generate_token(data = token_data, remember=remember)
+
+    res.set_cookie(key = "access_token", value = access_token, httponly = True, max_age = 31536000 if remember else None)
     res.set_cookie(key = "roles", value = roles, httponly = True)
     
     return { 
