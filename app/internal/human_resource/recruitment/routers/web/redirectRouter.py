@@ -36,4 +36,4 @@ def home(req: Request, user_data: dict = Depends(get_token)):
     if "Recruitment" not in userRoles and userRoles["Recruitment"] not in redirectPath:
         return "page not found (2)"
 
-    return RedirectResponse("/internal/recruitment" + redirectPath[userRoles["Recruitment"]])
+    return RedirectResponse("/rms" + redirectPath[userRoles["Recruitment"]])
