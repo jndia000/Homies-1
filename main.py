@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles as sf
 # To create tables
 import models
 from database import engine
-# models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 
 # App Instance
