@@ -19,8 +19,11 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 12400
 
 
 # Generate Token
-def generate_token(data: dict, expires_delta: Optional[timedelta] = None):
+def generate_token(data: dict, remember: bool, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
+    if remember:
+        expires_delta = 31536000
+
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:

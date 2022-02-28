@@ -14,7 +14,7 @@ template = Jinja2Templates(directory = "app/internal/human_resource/recruitment/
 
 
 # Router
-router = APIRouter(prefix="/recruitment/dh")
+router = APIRouter(prefix="/dh")
 
 
 def isAuthorized(user_data):
@@ -26,7 +26,7 @@ def isAuthorized(user_data):
 @router.get("/")
 def home(req: Request, user_data: dict = Depends(get_token)):
     if(isAuthorized(user_data)):
-        return RedirectResponse("/internal/recruitment/dh/dashboard")
+        return RedirectResponse("/dh/dashboard")
     return "page not found"
 
 
