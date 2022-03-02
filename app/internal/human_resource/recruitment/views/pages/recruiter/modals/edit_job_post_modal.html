@@ -1,0 +1,177 @@
+{# View Manpower Request Modal #}
+<div class="modal fade" id="viewManpowerRequestModal">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Manpower Request Details</span>
+                </h4>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body p-5">
+
+                {# Manpower Request Document #}
+                <div class="table-responsive" id="manpowerRequestDocument">
+                    <table class="table table-bordered w-100" width="100%">
+                        <tr class="bg-light">
+                            <td colspan="3" class="text-center">
+                                <h5 class="mb-0">MANPOWER REQUEST DOCUMENT</h5>
+                                <div class="small">HoMIES Company</div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Requisition Number #}
+                            <td colspan="3">
+                                <span class="font-weight-bold">Requisition No.:</span>
+                                <span id="requisitionNo"></span>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Requesting Department #}
+                            <td>
+                                <div class="font-weight-bold">Requesting Department</div>
+                                <div class="mx-3" id="requestorName"></div>
+                                <div class="mx-3 small text-secondary" id="requestorDepartment"></div>
+                            </td>
+
+                            {# Date Requested #}
+                            <td>
+                                <div class="font-weight-bold">Date Requested</div>
+                                <div class="mx-3">
+                                    <div id="dateRequested"></div>
+                                </div>
+                            </td>
+
+                            {# Deadline #}
+                            <td>
+                                <div class="font-weight-bold">Deadline</div>
+                                <div class="mx-3">
+                                    <div id="deadline"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Vacant Position #}
+                            <td>
+                                <div class="font-weight-bold">Vacant Position</div>
+                                <div class="mx-3" id="requestedPosition"></div>
+                            </td>
+
+                            {# Staffs Needed #}
+                            <td>
+                                <div class="font-weight-bold">Staffs Needed</div>
+                                <div class="mx-3" id="noOfStaffsNeeded"></div>
+                            </td>
+
+                            {# Employment Type #}
+                            <td>
+                                <div class="font-weight-bold">Employment Type</div>
+                                <div class="mx-3" id="employmentType"></div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Nature of Request #}
+                            <td>
+                                <div class="font-weight-bold">Nature of Request</div>
+                                <div class="mx-3" id="requestNature"></div>
+                            </td>
+
+                            {# Suggested Salary #}
+                            <td colspan="2">
+                                <div class="font-weight-bold">Suggested Salary</div>
+                                <div class="mx-3" id="suggestedSalary"></div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Request Description #}
+                            <td colspan="4">
+                                <div class="font-weight-bold">Request Description</div>
+                                <div class="mx-3">
+                                    <div class="my-3 text-justify" id="requestDescription"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="bg-light">
+                            <th class="text-center" colspan="3">Approval</th>
+                        </tr>
+                        <tr>
+
+                            {# Signed By #}
+                            <td colspan="2">
+                                <div class="font-weight-bold">Signed By</div>
+                                <div class="mx-3" id="signedBy"></div>
+                            </td>
+
+                            {# Signed At #}
+                            <td>
+                                <div class="font-weight-bold">Signed At</div>
+                                <div class="mx-3" id="signedAt"></div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            {# Approved By #}
+                            <td colspan="2">
+                                <div class="font-weight-bold">Approved By</div>
+                                <div class="mx-3" id="approvedBy"></div>
+                            </td>
+
+                            {# Approved At #}
+                            <td>
+                                <div class="font-weight-bold">Approved At</div>
+                                <div class="mx-3" id="approvedAt"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            {# Completed At #}
+                            <td colspan="3">
+                                <div class="font-weight-bold">Completed At</div>
+                                <div class="mx-3" id="completedAt"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Confirm Update #}
+<div class="modal" id="confirmUpdateJobPostModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Confimation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to save changes?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-default" id="cancelUpdateJobPostBtn" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-info" id="confirmUpdateJobPostBtn">
+                    <span>Yes, save it!</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

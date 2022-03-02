@@ -1,0 +1,100 @@
+{# Sidebar #}
+<div class="sidebar">
+
+    {# Sidebar user #}
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+        {# User Image #}
+        <div class="image">
+            <img src="{{BASE_URL_WEB}}static/dist/img/user2-160x160.jpg" class="img-circle border" alt="User Image">
+        </div>
+
+        {# User Full Name Loader #}
+        <div class="info mr-1" style="width: 100%" id="userFullNameLoader">
+            <div class="skeleton-loader w-75"></div>
+            <div class="skeleton-loader sm w-50"></div>
+            <div class="skeleton-loader sm mb-0 w-50"></div>
+        </div>
+
+        {# User Full Name #}
+        <div class="info mr-1" id="userFullNameDisplay" style="display: none">
+            <a href="#" class="d-block">
+                <span class="text-truncate" id="userFullName"></span>
+                <div class="small text-secondary text-truncate" id="userPosition"></div>
+                <div class="small text-secondary text-truncate" id="userDepartment"></div>
+            </a>
+        </div>
+    </div>
+
+    {# Sidebar Menu #}
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            <li class="nav-header font-weight-bold text-wrap">RECRUITMENT MANAGEMENT SYSTEM</li>
+
+            <li class="nav-header">CORE</li>
+            <li class="nav-item">
+                <a href="{{ DM_WEB_ROUTE }}dashboard" class="nav-link{% if active_navlink == "Dashboard" %} active{%
+                    endif %}">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+
+            <li class="nav-header">RECRUITMENT</li>
+            <li class="nav-item">
+                <a href="#" class="nav-link{% if active_navlink == "Manpower Requests" %} active{% endif %}">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Manpower Requests</p>
+                    <i class="fas fa-angle-left right"></i>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="{{ DM_WEB_ROUTE }}add-manpower-request" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Create request</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ DM_WEB_ROUTE }}manpower-requests" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View all requests</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{{DM_WEB_ROUTE}}hired-applicants" class="nav-link{% if active_navlink == "Hired Applicants" %}
+                    active{% endif %}">
+                    <i class="nav-icon fas fa-handshake"></i>
+                    <p>New Hired</p>
+                </a>
+            </li>
+
+            <li class="nav-header">ONBOARDING</li>
+            <li class="nav-item">
+                <a href="{{DM_WEB_ROUTE}}onboarding-employees" class="nav-link{% if active_navlink == "Onboarding Employees" %} active{% endif %}">
+                    <i class="fas fa-user-tie nav-icon"></i>
+                    <p>Onboarding Employees</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{DM_WEB_ROUTE}}general-tasks" class="nav-link{% if active_navlink == "General Tasks" %}
+                    active{% endif %}">
+                    <i class="fas fa-tasks nav-icon"></i>
+                    <p>General Tasks</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{# Sidebar Custom #}
+<div class="sidebar-custom">
+    <a href="#" class="btn btn-sm btn-light"><i class="fas fa-cogs"></i></a>
+    <button class="btn btn-sm btn-danger hide-on-collapse pos-right" data-toggle="modal" data-target="#logoutModal">
+        <span>Log out</span>
+        <i class="fas fa-sign-out-alt ml-1"></i>
+    </button>
+</div>

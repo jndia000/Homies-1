@@ -1,0 +1,54 @@
+{# Confirm Applicaion Modal #}
+<div class="modal" id="confirmApplicationModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Apply for this job</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>Please review your details before submitting</p>
+
+                <table class="table border-bottom">
+                    <tr>
+                        <td><b>Your name</b></td>
+                        <td id="applicantFullName"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Contact Number</b></td>
+                        <td id="applicantContactNumber"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td id="applicantEmail"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Resume</b></td>
+                        <td id="applicantResume">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            <span>Attached</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="form-group">
+                    <div class="mb-2" id="salaryRangeField">
+                        <div class="icheck-primary d-inline">
+                            <input type="checkbox" id="confirmReview" name="confirmReview">
+                            <label class="font-weight-normal" for="confirmReview">I confirm that I enter my valid information and agree to the <a href="#">Terms and Policy</a> of this website.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelApplicationBtn">Cancel</button>
+                <button type="button" id="submitApplicationBtn" class="btn btn-primary" disabled>
+                    <span>Submit</span>
+                    <i class="fas fa-file-export ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

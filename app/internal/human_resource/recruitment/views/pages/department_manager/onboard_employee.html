@@ -1,0 +1,368 @@
+{% extends "pages/department_manager/_layout.html" %}
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <div class="content" id="availableJobDetails">
+        <div class="container-fluid">
+
+            {# Details form #}
+            <form class="card card-primary card-outline" id="addOnboardingEmployeeForm">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Onboard Employee</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="bs-stepper linear">
+
+                        {# Stepper Header #}
+                        <div class="bs-stepper-header" role="tablist">
+                            <div class="step" data-target="#applicantInformationPanel">
+                                <button 
+                                    type="button" 
+                                    class="step-trigger" 
+                                    role="tab" 
+                                    aria-controls="applicantInformationPanel" 
+                                    id="applicantInformationPanelTrigger"
+                                >
+                                    <span class="bs-stepper-circle bg-primary">1</span>
+                                    <span class="bs-stepper-label">New Employee Information</span>
+                                </button>
+                            </div>
+
+                            <div class="line"></div>
+                            
+                            <div class="step" data-target="#onboardingtasksPanel">
+                                <button 
+                                    type="button" 
+                                    class="step-trigger" 
+                                    role="tab" 
+                                    aria-controls="onboardingtasksPanel" 
+                                    id="onboardingtasksPanelTrigger"
+                                >
+                                    <span class="bs-stepper-circle bg-primary">2</span>
+                                    <span class="bs-stepper-label">Onboarding Tasks</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        {# Stepper Content #}
+                        <div class="bs-stepper-content mt-3">
+
+                            {# Loader #}
+                            <div id="onboardingEmployeeFormLoader">
+                                <div class="skeleton-loader"></div>
+                                <div class="skeleton-loader w-25 my-3"></div>
+
+                                <div class="form-row mb-3">
+                                    {% for i in range(4) %}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="skeleton-loader w-25"></div>
+                                                <div class="skeleton-loader" style="height: 35px"></div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-row mb-3">
+                                    {% for i in range(2) %}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="skeleton-loader w-25"></div>
+                                                <div class="skeleton-loader" style="height: 35px"></div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="skeleton-loader w-25"></div>
+                                            <div class="skeleton-loader" style="height: 35px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# Applicant Information #}
+                            <div id="applicantInformationPanel" class="content" role="tabpanel" aria-labelledby="applicantInformationPanelTrigger">
+
+                                {# Information #}
+                                <div id="onboardingEmployeeForm" style="display: none">
+                                    <p class="font-weight-bold">Please confirm and make sure the employee details are correct and updated.</p>
+
+                                    <div class="form-group mb-3">
+                                        <input type="hidden" id="positionID" name="positionID">
+                                        <p>Position: <span id="position"></span></p>
+                                    </div>
+
+                                    {# Applicant's Name Field #}
+                                    <div class="form-row mb-3">
+
+                                        {# First name #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstName">
+                                                    <span>First Name</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="firstName"
+                                                    name="firstName"
+                                                    placeholder="Enter first name here"
+                                                >
+                                            </div>
+                                        </div>
+
+                                        {# Middle Name #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="middleName">Middle Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="middleName"
+                                                    name="middleName"
+                                                    placeholder="Enter middle name here"
+                                                >
+                                            </div>
+                                        </div>
+
+                                        {# Last Name #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lastName">
+                                                    <span>Last Name</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="lastName"
+                                                    name="lastName"
+                                                    placeholder="Enter last name here"
+                                                >
+                                            </div>
+                                        </div>
+                                        
+                                        {# Suffix Name #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="suffixName">Suffix Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="suffixName"
+                                                    name="suffixName"
+                                                    placeholder="Enter suffix name here"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {# Contact Information Field #}
+                                    <div class="form-row mb-3">
+                                        
+                                        {# Contact Number #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="contactNumber">
+                                                    <span>Contact Number</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-phone"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        id="contactNumber"
+                                                        name="contactNumber"
+                                                        placeholder="Please type contact number"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        {# Email #}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">
+                                                    <span>Email</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input 
+                                                        type="email" 
+                                                        class="form-control" 
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Enter email here"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {# Start of Employment #}
+                                    <div class="form-row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="employmentStartDate">
+                                                    <span>Start of Employment</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input 
+                                                    class="form-control"
+                                                    type="date" 
+                                                    id="employmentStartDate" 
+                                                    name="employmentStartDate"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-right">
+                                        <button type="button" class="btn btn-primary" id="nextBtnForApplicantInformation">
+                                            <span>Next</span>
+                                            <i class="fas fa-caret-right ml-1"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# Onboarding Tasks #}
+                            <div 
+                                id="onboardingtasksPanel" 
+                                class="content" 
+                                role="tabpanel" 
+                                aria-labelledby="onboardingtasksPanelTrigger"
+                            >
+                                <div>
+
+                                    {# Genearal Onboarding Tasks #}
+                                    <label>General Onboarding Task</label>
+                                    <div class="table-responsive mb-5">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="w-100">Task</th>
+                                                    <th style="min-width: 15rem" class="text-center">
+                                                        <span>Start</span>
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th style="min-width: 15rem" class="text-center">
+                                                        <span>Deadline</span>
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th style="min-width: 3rem"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="generalOnboardingTasksDTBody">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="py-5 text-center">
+                                                            <h3 class="text-secondary">No general tasks yet</h3>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    {# Added Tasks #}
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div>
+                                            <label>Added Tasks</label>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addOnboardingTaskModal">
+                                                <span>Add onboarding task</span>
+                                                <i class="fas fa-plus ml-1"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive mb-5">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="w-100">Task</th>
+                                                    <th style="min-width: 16.5rem; max-width: 16.5rem;" class="text-center">
+                                                        <span>Start</span>
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th style="min-width: 16.5rem; max-width: 16.5rem;" class="text-center">
+                                                        <span>Deadline</span>
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th style="min-width: 3rem"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="addedOnboardingTasksDTBody">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <div class="py-5 text-center">
+                                                            <h3>No added tasks yet</h3>
+                                                            <div class="text-secondary">You can add another onboarding task by clicking the button at the top-right.</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-secondary" onclick="stepper.previous()">
+                                        <i class="fas fa-caret-left mr-1"></i>
+                                        <span>Previous</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="addOnboardingEmployeeSubmitBtn" disabled>
+                                        <span>Submit</span>
+                                        <i class="fas fa-check ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/department_manager/modals/add_onboarding_employee_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{ url_for('src', path='/js/internal/human_resource/recruitment/department_manager/onboarding.js') }}"></script>   
+{% endblock %}

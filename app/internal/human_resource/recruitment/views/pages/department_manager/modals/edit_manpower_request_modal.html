@@ -1,0 +1,30 @@
+{# Confirm Edit #}
+<div class="modal" id="confirmEditManpowerRequestModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="confirmEditManpowerRequestMode" value="0">
+                <p>Are you sure you want to update your request now?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="cancelEditManpowerRequestBtn" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-info" id="confirmEditManpowerRequestBtn">
+                    <span>Yes, update it!</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

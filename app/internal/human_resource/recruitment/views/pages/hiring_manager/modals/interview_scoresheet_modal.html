@@ -1,0 +1,135 @@
+{# Confirm Save Scoresheet Modal #}
+<div class="modal" id="confirmSaveScoresheetModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to save this scoresheet for this applicant?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal"
+                    id="cancelConfirmSaveScoresheetModalBtn"
+                >Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveScoresheetBtn">
+                    <span>Yes, save it!</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Add Interview Question Modal #}
+<div class="modal" id="addInterviewQuestionModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="addInterviewQuestionForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Add Interview Question</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <textarea 
+                        class="form-control" 
+                        rows="3" 
+                        id="question" 
+                        name="question" 
+                        placeholder="Please type the additional interview question here"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                >Cancel</button>
+                <button type="submit" id="addInterviewQuestionBtn" class="btn btn-primary">
+                    <span>Add</span>
+                    <i class="fas fa-plus ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Confirm Remove General Question Modal #}
+<div class="modal" id="confirmRemoveGeneralQuestionModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" id="confirmRemoveGeneralQuestionForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="generalInputName" name="generalInputName">
+                <p>Are you sure you want to remove this general interview question?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal"
+                >Cancel</button>
+                <button type="submit" class="btn btn-danger" id="saveScoresheetBtn">
+                    <span>Yes, remove it!</span>
+                    <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Confirm Remove Added Question Modal #}
+<div class="modal" id="confirmRemoveAddedQuestionModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="confirmRemoveAddedQuestionForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="addedInputName" name="addedInputName">
+                <p>Are you sure you want to remove this added interview question?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal"
+                >Cancel</button>
+                <button type="submit" class="btn btn-danger" id="saveScoresheetBtn">
+                    <span>Yes, remove it!</span>
+                    <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

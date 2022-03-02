@@ -708,3 +708,10 @@ const daysLabels = (start, end) => {
 	}
 	return days;
 }
+
+
+/** Get pathnamePart */
+const getPathnamePart = (toTheLast = 0) => {
+	const pathname = window.location.pathname.split('/')
+	return pathname[pathname.length-toTheLast]
+}

@@ -1,0 +1,142 @@
+{# Add General Task Modal #}
+<div class="modal fade" id="addGeneralTaskModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="addGeneralTaskForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Add General Task</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <p id="onboardingTaskDescription"></p>
+
+                {# Task Type #}
+                <input type="hidden" id="taskType" name="taskType">
+
+                {# Task Title #}
+                <div class="form-group">
+                    <label for="taskTitleForAdd">
+                        <span>Task Title</span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="taskTitleForAdd" 
+                        name="taskTitle" 
+                        placeholder="Type the title of the task here"
+                    >
+                </div>
+                
+                {# Description #}
+                <div class="form-group">
+                    <label for="descriptionForAdd">
+                        <span>Description</span>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <textarea 
+                        class="form-control" 
+                        rows="3" 
+                        id="descriptionForAdd" 
+                        name="description" 
+                        placeholder="Please type the description of the task here"]
+                    ></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelAddGeneralTaskBtn"
+                >Cancel</button>
+                <button type="submit" id="addGeneralTaskBtn" class="btn btn-primary">
+                    <span>Add</span>
+                    <i class="fas fa-plus ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# General Onboarding Task Details #}
+<div class="modal fade" id="generalOnboardingTaskDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>General Onboarding Task Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <th>Task Title</th>
+                        <td id="taskTitle"></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td id="taskDescription"></td>
+                    </tr>
+                    <tr>
+                        <th>Added By</th>
+                        <td id="addedBy"></td>
+                    </tr>
+                    <tr>
+                        <th>Added At</th>
+                        <td id="addedAt"></td>
+                    </tr>
+                    <tr>
+                        <th>Last updated By</th>
+                        <td id="lastUpdatedBy"></td>
+                    </tr>
+                    <tr>
+                        <th>Last Updated At</th>
+                        <td id="lastUpdatedAt"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Remove General Onboarding Task Modal #}
+<div class="modal" id="removeGenOnboardingTaskModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="removeGenOnboardingTaskForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body mb-3">
+                <input type="hidden" id="onboardingTaskID" name="onboardingTaskID">
+                <div>Are you sure you want to remove this task on your general onboarding task list?</div>
+                <div class="small text-danger">NOTE: Your request will be remove and it cannot be undone</div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger">
+                    <span>Yes, remove it.</span>
+                    <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

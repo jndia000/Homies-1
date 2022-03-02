@@ -1,0 +1,26 @@
+{% extends "pages/department_head/_home_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+            {% include "components/under_maintenance.html"  %}
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('static', path='/dist/js/pages/admin/dashboard.js')}}"></script>
+{% endblock %}

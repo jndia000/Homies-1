@@ -1,0 +1,87 @@
+{% extends "pages/recruiter/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Job Categories Card #}
+            <div class="card card-primary card-outline">
+
+                {# Card Header #}
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Job Categories</h3>
+                        
+                        <div class="card-tools">
+                            <div type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addJobCategoryModal">
+                                <i class="fas fa-plus mr-1"></i>
+                                <span>Add Category</span>
+                            </div>
+                            <div type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Card Body #}
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table 
+                            id="jobCategoriesDT" 
+                            class="table table-bordered table-hover w-100" 
+                            width="100" 
+                            cellspacing="0"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="sr-only">Date Added</div>
+                                    </th>
+                                    <th>Category Name</th>
+                                    <th>Description</th>
+                                    <th class="text-center">
+                                        <div class="sr-only">Actions</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center py-5 wait">
+                                            <div class="spinner-border text-primary my-3" role="status">
+                                                <span class="sr-only">Loading ...</span>
+                                            </div>
+                                            <div class="text-secondary">Loading ...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/recruiter/modals/job_categories_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/recruiter/job_categories.js')}}"></script>
+{% endblock %}

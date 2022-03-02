@@ -1,8 +1,16 @@
 # Import Packages
 from fastapi import Depends
+from typing import Dict
 from fastapi.exceptions import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jwt_token import verify_token
+from pydantic import BaseModel
+
+
+class UserData(BaseModel):
+    user_id: str
+    employee_id: str
+    roles: Dict[str, str]
 
 
 # OAuth2 Scheme
@@ -14,13 +22,17 @@ def get_user(token: str = Depends(oauth2_scheme)):
     return verify_token(token)
 
 
-# Check Priviledge
-def authorized(user_data, user_type: str):
-    if user_type not in user_data.roles:
-        raise HTTPException(
-            status_code = 401,
-            detail = "Unauthorized",
-            headers = {"WWW-Authenticate": "Bearer"}
-        )
-    else:
+# If Authorized
+def isAuthorized(user_data, subsystem: str, role: str):
+    if subsystem in user_data.roles and user_data.roles[subsystem] == role:
         return True
+    raise HTTPException(
+        status_code = 401,
+        detail = "Unauthorized",
+        headers = {"WWW-Authenticate": "Bearer"}
+    )
+
+
+# Has Access
+def hasAccess(user_data, subsystem: str, role: str):
+    return subsystem in user_data["roles"] and user_data["roles"][subsystem] == role

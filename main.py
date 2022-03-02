@@ -1,13 +1,12 @@
 # Import Packages
-from fastapi import FastAPI, Request
-from fastapi.responses import RedirectResponse
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles as sf
 
 
 # To create tables
-# import models
-# from database import engine
-# models.Base.metadata.create_all(bind=engine)
+import models
+from database import engine
+models.Base.metadata.create_all(bind=engine)
 
 
 # App Instance

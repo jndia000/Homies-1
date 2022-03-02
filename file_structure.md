@@ -1,3 +1,7 @@
+# File Structure
+
+## Integrated
+
 ```
 📦Homies
  ┣ 📂app
@@ -49,3 +53,30 @@
  ┣ 📜oauth2.py
  ┗ 📜requirements.txt
  ```
+
+## Per Subsystem
+
+```
+📦Specific Folder
+ ┣ 📂core
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┣ 📂finance
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┣ 📂human_resouce
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┃ ┣ 📂internal
+ ┗ 📂logistics
+   ┣ 📂internal
+   ┣ 📂internal
+   ┣ 📂internal
+   ┗ 📂internal
+
+```

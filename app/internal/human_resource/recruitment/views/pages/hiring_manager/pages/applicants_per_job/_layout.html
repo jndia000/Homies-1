@@ -1,0 +1,233 @@
+{% extends "pages/hiring_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Job Post Summary #}
+    <section class="content-header">
+        <div class="container-fluid">
+
+            {# Job Post Summary Loader #}
+            <div class="card card-primary card-outline" id="jobPostSummaryLoader">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="skeleton-loader" style="height: 35px"></div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="mb-3">
+                        <div class="skeleton-loader" style="width: 15rem"></div>
+                    </div>
+                    
+                    <div>
+                        <div class="skeleton-loader" style="width: 12rem"></div>
+                        <div class="skeleton-loader" style="width: 12rem"></div>
+                        <div class="skeleton-loader" style="width: 12rem"></div>
+                    </div>
+                </div>
+            </div>
+
+            {# Job Post Summary Card #}
+            <div class="card card-primary card-outline" id="jobPostSummary" style="display: none">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3 class="mb-1" id="position"></h3>
+                        </div>
+                        <div id="jobPostStatus"></div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="mb-3">
+                        <i class="fas fa-clock mr-1 text-secondary"></i>
+                        <span id="jobPostedAt"></span>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <b>Staffs Needed:</b>
+                            <span id="staffsNeeded"></span>
+                        </div>
+                        <div>
+                            <b>Employment Type:</b>
+                            <span id="employmentType"></span>
+                        </div>
+                        <div>
+                            <b>Deadline:</b>
+                            <span id="deadline"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="form-row">
+
+                {# Menu #}
+                <div class="col-lg-3">
+
+                    {# Menu Loader #}
+                    <div class="card card-primary card-outline" id="menuLoader">
+                        <div class="card-header align-items-center">
+                            <div class="skeleton-loader mb-0" style="height: 28px; width: 8rem"></div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column" id="applicantsMenu">
+                                
+                                {% for i in range(5) %}
+                                    <li class="nav-item">
+                                        <div class="d-flex py-2 px-3">
+                                            <div>
+                                                <div class="skeleton-loader mb-0 mr-2" style="height: 25px; width: 25px"></div>
+                                            </div>
+                                            <div>
+                                                <div class="skeleton-loader mb-0" style="height: 25px; width: 10rem"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    {# Menu List #}
+                    <div class="card card-primary card-outline" id="menu" style="display: none">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Menus</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-sm btn-default" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column" id="applicantsMenu">
+
+                                {# For screening link #}
+                                <li class="nav-item">
+                                    <div 
+                                        class="nav-link{% if active_menu == 'For screening' %} text-primary{% endif %}"
+                                        id="forScreeningLink"
+                                        role="button"
+                                    >
+                                        <i class="fas fa-search" style="width: 1.5rem"></i>
+                                        <span>For screening</span>
+                                        <span 
+                                            class="badge bg-warning float-right" 
+                                            id="forScreeningCount" 
+                                            style="display: none"
+                                        >
+                                            <div class="spinner-border spinner-border-sm"></div>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                {# For interview link #}
+                                <li class="nav-item">
+                                    <div 
+                                        class="nav-link{% if active_menu == 'For interview' %} text-primary{% endif %}"
+                                        id="forInterviewLink"
+                                        role="button"
+                                    >
+                                        <i class="fas fa-user-friends" style="width: 1.5rem"></i>
+                                        <span>For interview</span>
+                                        <span 
+                                            class="badge bg-info float-right" 
+                                            id="forInterviewCount" 
+                                            style="display: none"
+                                        >
+                                            <div class="spinner-border spinner-border-sm"></div>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                {# Interviewed Applicants link #}
+                                <li class="nav-item">
+                                    <div 
+                                        class="nav-link{% if active_menu == 'Interviewed applicants' %} text-primary{% endif %}"
+                                        id="interviewedLink"
+                                        role="button"
+                                    >
+                                        <i class="fas fa-user-check" style="width: 1.5rem"></i>
+                                        <span>Interviewed applicants</span>
+                                        <span 
+                                            class="badge bg-info float-right"
+                                            id="interviewedApplicantsCount" 
+                                            style="display: none"
+                                        >
+                                            <div class="spinner-border spinner-border-sm"></div>
+                                        </span>
+                                    </>
+                                </li>
+
+                                {# Hired Applcants link #}
+                                <li class="nav-item">
+                                    <div 
+                                        class="nav-link{% if active_menu == 'Hired applicants' %} text-primary{% endif %}"
+                                        id="hiredLink"
+                                        role="button"
+                                    >
+                                        <i class="fas fa-handshake" style="width: 1.5rem"></i>
+                                        <span>Hired applicants</span>
+                                        <span 
+                                            class="badge bg-success float-right" 
+                                            id="hiredCount" 
+                                            style="display: none"
+                                        >
+                                            <div class="spinner-border spinner-border-sm"></div>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                {# Rejected Applcants link #}
+                                <li class="nav-item">
+                                    <div 
+                                        class="nav-link{% if active_menu == 'Rejected applicants' %} text-primary{% endif %}"
+                                        id="rejectedLink"
+                                        role="button"
+                                    >
+                                        <i class="fas fa-user-times" style="width: 1.5rem"></i>
+                                        <span>Rejected applicants</span>
+                                        <span 
+                                            class="badge bg-danger float-right"
+                                            id="rejectedCount" 
+                                            style="display: none"
+                                        >
+                                            <div class="spinner-border spinner-border-sm"></div>
+                                        </span>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {# Applicant List #}
+                <div class="col-lg-9">
+                    {% block dataTable %}{% endblock %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/hiring_manager/applicants.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,570 @@
+{# Interviewee Details Modal #}
+{# Not yet interviewed #}
+<div class="modal fade" id="intervieweeDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Interviewee Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# Tabs #}
+                <ul class="nav nav-tabs" role="tablist">
+                    
+                    {# Interviewee Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="intervieweeDetailsTab" 
+                            data-toggle="pill" 
+                            href="#intervieweeDetailsPane" 
+                            role="tab" 
+                        >Applicant Details</a>
+                    </li>
+                    
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="intervieweeTimelineTab" 
+                            data-toggle="pill" 
+                            href="#intervieweeTimelinePane" 
+                            role="tab" 
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content py-3">
+
+                    {# Interviewee Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="intervieweeDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="intervieweeDetailsTab"
+                    >
+                        <table class="table border-bottom">
+                            <tr>
+                                <th>Interviewee Name</th>
+                                <td id="intervieweeFullName"></td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td id="intervieweeContactNumber"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td id="intervieweeEmail"></td>
+                            </tr>
+                            <tr>
+                                <th>Resume</th>
+                                <td>
+                                    <a 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="btn btn-sm btn-secondary"
+                                        id="viewIntervieweeResumeBtn"
+                                    >
+                                        <span>View Resume</span>
+                                        <i class="fas fa-file-alt ml-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+
+                    {# Interviewee Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="intervieweeTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="intervieweeTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="intervieweeTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="intervieweeTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a type="submit" class="btn btn-primary" id="interviewNowBtn" disabled>
+                    <span>Interview now!</span>
+                    <i class="fas fa-check ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Interviewed Details Modal #}
+{# Recently Interviewed #}
+<div class="modal fade" id="interviewedDetailsModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="interviewedApplicantHiringForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Interviewee Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-3">Please review the details of the applicant/interviewee before hiring</label>
+
+                {# Tabs #}
+                <ul class="nav nav-tabs" role="tablist">
+                    
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="interviewedDetailsTab" 
+                            data-toggle="pill" 
+                            href="#interviewedDetailsPane" 
+                            role="tab" 
+                        >Applicant Details</a>
+                    </li>
+                    
+                    {# Score Sheet #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="interviewedScoreSheetTab" 
+                            data-toggle="pill" 
+                            href="#interviewedScoreSheetPane" 
+                            role="tab" 
+                        >Score Sheet</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="interviewedTimelineTab" 
+                            data-toggle="pill" 
+                            href="#interviewedTimelinePane" 
+                            role="tab" 
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content py-3">
+
+                    {# Applicant Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="interviewedDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="interviewedDetailsTab"
+                    >
+                        <table class="table border-bottom">
+                            <tr>
+                                <th>Applicant Name</th>
+                                <td id="interviewedFullName"></td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td id="interviewedContactNumber"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td id="interviewedEmail"></td>
+                            </tr>
+                            <tr>
+                                <th>Resume</th>
+                                <td>
+                                    <a 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="btn btn-sm btn-secondary"
+                                        id="viewInterviewedResumeBtn"
+                                    >
+                                        <span>View Resume</span>
+                                        <i class="fas fa-file-alt ml-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+
+                    {# Score Sheet Pane #}
+                    <div 
+                        class="tab-pane fade" 
+                        id="interviewedScoreSheetPane" 
+                        role="tabpanel"
+                        aria-labelledby="interviewedScoreSheetTab"
+                    >
+                        <table class="table table-bordered" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Question</th>
+                                    <th class="text-center" style="min-width: 5rem">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="interviewedScoreSheet">
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="py-5 text-center">
+                                            <div class="spinner-border text-primary my-3">
+                                                <div class="sr-only">Loading ...</div>
+                                            </div>
+                                            <div class="text-secondary">Loading ...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {# Interviewed Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="interviewedTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="interviewedTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="interviewedTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="interviewedTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+
+                {# Hiring Field #}
+                <div id="hiringField">
+
+                    {# Applicant ID #}
+                    <input type="hidden" id="interviewedApplicantID" name="applicantID">
+    
+                    {# Reject or Approve #}
+                    <label class="mt-3">Select decision for hiring</label>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <div class="custom-control custom-radio">
+                                <div class="icheck-danger d-inline">
+                                    <input 
+                                        type="radio" 
+                                        name="applicantStatus" 
+                                        id="rejectFromInterview"
+                                        value="Rejected from interview"
+                                    >
+                                    <label for="rejectFromInterview">Reject from interview</label>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <div class="icheck-success d-inline">
+                                    <input 
+                                        type="radio" 
+                                        name="applicantStatus" 
+                                        id="hiredApplicant"
+                                        value="Hired"
+                                    >
+                                    <label for="hiredApplicant">Hired this applicant</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Textarea for Reason of Rejecting Request #}
+                    <div class="mt-4" id="remarksField" style="display:none">
+                        <div class="form-group">
+                            <label for="reason">Please include reason for rejecting request<span class="text-danger"> *</span></label>
+                            <textarea 
+                                type="text" 
+                                name="remarks" 
+                                id="remarks" 
+                                class="form-control"
+                                rows=5
+                                placeholder="Type reason for rejecting applicant here"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="cancelApplicantHiringBtn" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    <span>Submit</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Applicant Details Modal #}
+{# Either Hired or Contract Signed #}
+<div class="modal fade" id="applicantDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Applicant Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# Tabs #}
+                <ul class="nav nav-tabs" role="tablist">
+                    
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="applicantDetailsTab" 
+                            data-toggle="pill" 
+                            href="#applicantDetailsPane" 
+                            role="tab" 
+                        >Applicant Details</a>
+                    </li>
+                    
+                    {# Score Sheet #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link"
+                            id="applicantScoreSheetTab"
+                            data-toggle="pill" 
+                            href="#applicantScoreSheetPane" 
+                            role="tab" 
+                        >Score Sheet</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="applicantTimelineTab" 
+                            data-toggle="pill" 
+                            href="#applicantTimelinePane" 
+                            role="tab" 
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content py-3">
+
+                    {# Applicant Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="applicantDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantDetailsTab"
+                    >
+                        <table class="table border-bottom">
+                            <tr>
+                                <th>Applicant Name</th>
+                                <td id="applicantFullName"></td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td id="applicantContactNumber"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td id="applicantEmail"></td>
+                            </tr>
+                            <tr>
+                                <th>Resume</th>
+                                <td>
+                                    <a 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="btn btn-sm btn-secondary"
+                                        id="viewApplicantResumeBtn"
+                                    >
+                                        <span>View Resume</span>
+                                        <i class="fas fa-file-alt ml-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+
+                    {# Score Sheet Pane #}
+                    <div 
+                        class="tab-pane fade" 
+                        role="tabpanel"
+                        id="applicantScoreSheetPane"
+                        aria-labelledby="applicantScoreSheetTab"
+                    >
+                        <table class="table table-bordered" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Question</th>
+                                    <th class="text-center" style="min-width: 5rem">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicantScoreSheet">
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="py-5 text-center">
+                                            <div class="spinner-border text-primary my-3">
+                                                <div class="sr-only">Loading ...</div>
+                                            </div>
+                                            <div class="text-secondary">Loading ...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {# Applicant Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="applicantTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="applicantTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="applicantTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{# Mark As Not Innterviewed Modal #}
+<div class="modal" id="markAsNotInterviewedModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="markAsNotInterviewedForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Mark as not interviewed</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="remarks">Please insert remarks for rejecting this request</label>
+                    <input type="hidden" id="intervieweeID" name="intervieweeID">
+                    <textarea 
+                        name="remarks" 
+                        id="remarks" 
+                        rows="5" 
+                        class="form-control"
+                        placeholder="Please type the remarks here..."
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelRejectRequestBtn">Cancel</button>
+                <button type="submit" class="btn btn-danger" id="submitRejectRequestBtn">
+                    <span>Submit</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

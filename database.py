@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 # Constants
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root@localhost/homies"
+SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root@localhost/homies_test"
 
 
 # Engine

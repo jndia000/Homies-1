@@ -1,0 +1,90 @@
+{% extends "pages/department_head/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Content #}
+    <section class="content px-3">
+        
+      <div class="card card-primary card-outline">
+        
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="card-title">Manpower Requisition Report</div>
+            <div>
+              <button class="btn btn-sm btn-secondary">
+                <span>Print Report</span>
+                <i class="fas fa-print ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body" id="manpowerRequisitionReport">
+
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h4>HoMIES, Inc.</h4>
+            </div>
+            <div>
+              <h6>December 3, 2021</h6>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <th>Sample</th>
+              <th>Sample</th>
+              <th>Sample</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sample</td>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+              <tr>
+                <td>Sample</td>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+              <tr>
+                <td>Sample</td>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+              <tr>
+                <td>Sample</td>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+              <tr>
+                <td>Sample</td>
+                <td>Sample</td>
+                <td>Sample</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/department_head/modals/view_manpower_request_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/department_head/manpower_requests.js')}}"></script>
+{% endblock %}

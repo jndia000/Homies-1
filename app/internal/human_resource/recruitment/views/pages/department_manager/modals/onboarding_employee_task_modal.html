@@ -1,0 +1,398 @@
+{# Onboarding Employee Details Modal #}
+<div class="modal fade" id="onboardingEmployeeDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Onboarding Employee Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# Onboarding Employee Details #}
+                <table class="table border-bottom">
+                    <tr>
+                        <th>Employee Name</th>
+                        <td id="employeeFullNameForDetails"></td>
+                    </tr>
+                    <tr>
+                        <th>Position</th>
+                        <td id="employeePositionForDetails"></td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number</th>
+                        <td id="employeeContactNumberForDetails"></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td id="employeeEmailForDetails"></td>
+                    </tr>
+                    <tr>
+                        <th>Start of Employment</th>
+                        <td id="employmentStartDetails"></td>
+                    </tr>
+                    <tr>
+                        <th>Employment Contract</th>
+                        <td>
+                            <a 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="btn btn-sm btn-secondary"
+                                id="employmentContractBtn"
+                            >
+                                <span>View Employment Contract</span>
+                                <i class="fas fa-file-alt ml-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Change Task Progress Modal #}
+<div class="modal" id="changeTaskStatusModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="updateTaskStatusForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-sync-alt mr-2"></i>
+                    <span>Change Task Progress</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="onboardingEmployeeTaskID" name="onboardingEmployeeTaskID">
+                <label>Please select the current status of this task.</label>
+
+                <div class="form-group">
+
+                    {# Pending Radio #}
+                    <div class="custom-control custom-radio py-1">
+                        <div class="icheck-primary">
+                            <input 
+                                type="radio" 
+                                name="taskStatus" 
+                                id="pending"
+                                value="Pending"
+                            >
+                            <label for="pending">Pending</label>
+                        </div>
+                    </div>
+
+                    {# On Going #}
+                    <div class="custom-control custom-radio py-1">
+                        <div class="icheck-primary">
+                            <input 
+                                type="radio" 
+                                name="taskStatus" 
+                                id="onGoing"
+                                value="On Going"
+                            >
+                            <label for="onGoing">On Going</label>
+                        </div>
+                    </div>
+
+                    {# On Going #}
+                    <div class="custom-control custom-radio py-1">
+                        <div class="icheck-primary">
+                            <input 
+                                type="radio" 
+                                name="taskStatus" 
+                                id="completed"
+                                value="Completed"
+                            >
+                            <label for="completed">Completed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelSaveOnboardingTaskStatusBtn"
+                >Cancel</button>
+                <button 
+                    type="submit" 
+                    class="btn btn-info" 
+                    id="saveOnboardingTaskStatusBtn"
+                >
+                    <span>Save</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Onboarding Employee Task Details Modal #}
+<div class="modal fade" id="onboardingEmployeeTaskDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Onboarding Task Details</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" id="closeLogoutModalBtn">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                {# Tabs #}
+                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+    
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="taskDetailsTab" 
+                            data-toggle="pill" 
+                            href="#taskDetailsPane" 
+                            role="tab" 
+                            aria-controls="custom-content-below-home" 
+                            aria-selected="true"
+                        >Task Details</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="taskTimelineTab" 
+                            data-toggle="pill" 
+                            href="#taskTimelinePane" 
+                            role="tab" 
+                            aria-controls="#applicantTimelinePane" 
+                            aria-selected="false"
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content" id="custom-content-below-tabContent">
+
+                    {# Onboarding Employee Task Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="taskDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantDetailsTab"
+                    >
+                        <table class="table">
+                            <tr>
+                                <th>Task Title</th>
+                                <td id="taskTitle"></td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td id="taskDescription"></td>
+                            </tr>
+                            <tr>
+                                <th>Assigned for</th>
+                                <td id="taskType"></td>
+                            </tr>
+                            <tr>
+                                <th>Started at</th>
+                                <td id="taskStart"></td>
+                            </tr>
+                            <tr>
+                                <th>Will end or ended at</th>
+                                <td id="taskEnd"></td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td id="taskStatus"></td>
+                            </tr>
+                            <tr>
+                                <th>Progress</th>
+                                <td id="progress"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    {# Onboarding Employee Task Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="taskTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="onboardingEmployeeTaskTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="onboardingEmployeeTaskTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Add Onboarding Task Modal #}
+<div class="modal fade" id="addOnboardingEmployeeTaskModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="addOnboardingEmployeeTaskForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Add Onboarding Task</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# To whom assigned #}
+                <div class="form-group">
+                    <label>Assign task to<span class="text-danger"> *</span></label>
+                    <select 
+                        name="assignTaskTo" 
+                        id="assignTaskTo"
+                        class="form-control select2" 
+                        style="width: 100%"
+                    >
+                        <option></option>
+                        <option value="For new employees">New employee</option>
+                        <option value="For the team">Team</option>
+                        <option value="For department manager">Me (Department Manager)</option>
+                    </select>
+                </div>
+
+                {# Task Title #}
+                <div class="form-group">
+                    <label for="taskTitle">Task Title <span class="text-danger">*</span></label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="taskTitle" 
+                        name="taskTitle" 
+                        placeholder="Type the title of the task here"
+                    >
+                </div>
+                
+                {# Description #}
+                <div class="form-group">
+                    <label for="descriptionForAdd">Description <span class="text-danger">*</span></label>
+                    <textarea 
+                        class="form-control" 
+                        rows="3" 
+                        id="descriptionForAdd" 
+                        name="description" 
+                        placeholder="Please type the description of the task here"]
+                    ></textarea>
+                </div>
+
+                {# Start #}
+                <div class="form-group">
+                    <label for="start">Start <span class="text-danger">*</span></label>
+                    <input 
+                        class="form-control"
+                        type="datetime-local"
+                        id="startAt"
+                        name="startAt"
+                    >
+                </div>
+
+                {# Deadline #}
+                <div class="form-group">
+                    <label for="deadline">Deadline <span class="text-danger">*</span></label>
+                    <input 
+                        class="form-control"
+                        type="datetime-local"
+                        id="deadline"
+                        name="deadline"
+                    >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelAddOnboardingEmployeeTaskBtn"
+                >Cancel</button>
+                <button type="submit" class="btn btn-primary" id="addOnboardingEmployeeTaskBtn">
+                    <span>Add</span>
+                    <i class="fas fa-plus ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Delete Onboarding Task Modal #}
+<div class="modal" id="deleteOnboardingEmployeeTaskModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="deleteOnbaordingEmployeeTaskForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body mb-3">
+                <input type="hidden" id="onboardingEmployeeTaskIDForDelete" name="onboardingEmployeeTaskID">
+                <div>Are you sure you want to delete this task?</div>
+                <div class="small text-danger">NOTE: This task will be remove and it cannot be undone</div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelDeleteOnboardingEmployeeTaskBtn">No</button>
+                <button type="submit" class="btn btn-danger" id="deleteOnboardingEmployeseTaskBtn">
+                    <span>Yes, delete it.</span>
+                    <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

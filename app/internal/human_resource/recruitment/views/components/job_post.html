@@ -1,0 +1,70 @@
+{# Job Post Card #}
+<div class="card card-outline card-primary" id="jobPostDetails">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="card-title">Job Post</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-sm btn-default" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        {# Job Summary #}
+        <div class="mb-5">
+            
+            {# Vacant Position #}
+            <h1 class="m-0" id="vacantPosition"></h1>
+            
+            <div class="dropdown-divider"></div>
+            
+            {# Job Post Status, Category, Views #}
+            <div class="d-sm-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <span id="jobPostStatus"></span>
+                    <span class="mx-2">|</span>
+                    <!-- <i class="fas fa-exclamation-triangle text-warning"></i> -->
+                    <span id="jobCategory"></span>
+                </div>
+                <div class="small text-secondary mt-2 mt-sm-0">
+                    <i class="fas fa-eye mr-1"></i>
+                    <span id="jobPostViews">0 views</span>
+                </div>
+            </div>
+
+            {# If Category has been removed #}
+            <!-- <div class="border border-danger p-3 rounded mb-4">
+                Important: Job Category has been removed and this post cannot be filtered in public portal. Please select new category by editing this post.
+            </div> -->
+
+            {# Posted At, Humanized #}
+            <div class="mb-3">
+                <div id="postedAt"></div>
+                <div class="small text-secondary" id="postedAtHumanized"></div>
+            </div>
+
+            {# Employment Type, Salary Range, Open Until #}
+            <div>
+                <b>Employment Type: </b><span id="employmentTypeForJobPost"></span>
+            </div>
+            <div id="salaryRangeDisplay">
+                <b>Offered Salary: </b><span id="salaryRange"></span>
+            </div>
+            <div id="openUntilDisplay">
+                <b>Open Until: </b><span id="openUntil"></span>
+            </div>
+        </div>
+
+        {# Job Description #}
+        <div class="mb-5">
+            <h3>Job Description</h3>
+            <div class="dropdown-divider"></div>
+            <div class="my-3" id="jobDescription"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+{% extends "pages/hiring_manager/pages/applicants_per_job/_layout.html" %} 
+
+
+{% block dataTable %}
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="card-title">For Interview</div>
+    
+                <div class="card-tools">
+                    <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            {# Navigation Tabs #}
+            <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+
+                {# Applicants Tab #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link active" 
+                        id="custom-content-below-applicants-tab" 
+                        data-toggle="pill" href="#custom-content-below-applicants" 
+                        role="tab" 
+                        aria-controls="custom-content-below-applicants" 
+                        aria-selected="true"
+                    >Applicants</a>
+                </li>
+
+                {# Schedules Tab #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link" 
+                        id="custom-content-below-schedules-tab" 
+                        data-toggle="pill" href="#custom-content-below-schedules" 
+                        role="tab" 
+                        aria-controls="custom-content-below-schedules" 
+                        aria-selected="false"
+                    >Schedules</a>
+                </li>
+            </ul>
+
+            {# Tab Content #}
+            <div class="tab-content py-3" id="custom-content-below-tabContent">
+
+                {# Applicants Pane #}
+                <div 
+                    class="tab-pane fade show active" 
+                    id="custom-content-below-applicants" 
+                    role="tabpanel"
+                    aria-labelledby="custom-content-below-applicants-tab"
+                >
+                    <table 
+                        id="applicantsForInterviewDT" 
+                        class="table table-bordered table-hover w-100" 
+                        width="100" 
+                        cellspacing="0"
+                    >
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="sr-only">Date Added</div>
+                                </th>
+                                <th>Applicant Name</th>
+                                <th>Status</th>
+                                <th>Date Applied</th>
+                                <th class="text-center">
+                                    <div class="sr-only">Actions</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5">
+                                    {%  include "components/loading_spinner.html" %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {# Schedule Pane #}
+                <div 
+                    class="tab-pane fade" 
+                    id="custom-content-below-schedules" 
+                    role="tabpanel" 
+                    aria-labelledby="custom-content-below-schedules-tab"
+                >
+                    <div>
+
+                        <div class="form-row mb-3">
+                            <div class="col-sm-8">
+                                <div id="scheduleCountDetails">You have 1 schedule in total</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="text-right">
+                                    <a class="btn btn-sm btn-primary" href="{{ H_WEB_ROUTE }}job-posts/{{ job_post_id }}/create-interview-schedule">
+                                        <span>Create schedule</span>
+                                        <i class="fas fa-plus ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="interviewSchedules">
+                            <div class="py-5 text-center wait">
+                                <div class="spinner-border my-3 text-primary">
+                                    <div class="sr-only">Loading ...</div>
+                                </div>
+                                <div class="text-secondary">Please wait while loading records ...</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include 'pages/hiring_manager/modals/applicants_per_job/for_interview_modal.html' %}
+{% endblock %}

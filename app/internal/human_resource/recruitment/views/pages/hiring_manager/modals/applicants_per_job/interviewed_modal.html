@@ -1,0 +1,230 @@
+{# Applicant Details Modal #}
+<div class="modal fade" id="applicantDetailsModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="applicantHiringForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Applicant Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-3">Please review the applicant details before hiring</label>
+
+                {# Tabs #}
+                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                    
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="applicantDetailsTab" 
+                            data-toggle="pill" 
+                            href="#applicantDetailsPane" 
+                            role="tab" 
+                            aria-controls="custom-content-below-home" 
+                            aria-selected="true"
+                        >Applicant Details</a>
+                    </li>
+                    
+                    {# Score Sheet #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="custom-content-below-schedules-tab" 
+                            data-toggle="pill" href="#custom-content-below-schedules" 
+                            role="tab" 
+                            aria-controls="custom-content-below-schedules" 
+                            aria-selected="false"
+                        >Score Sheet</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="applicantTimelineTab" 
+                            data-toggle="pill" 
+                            href="#applicantTimelinePane" 
+                            role="tab" 
+                            aria-controls="#applicantTimelinePane" 
+                            aria-selected="false"
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content py-3" id="custom-content-below-tabContent">
+
+                    {# Applicant Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="applicantDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantDetailsTab"
+                    >
+                        <table class="table border-bottom">
+                            <tr>
+                                <th>Applicant Name</th>
+                                <td id="applicantFullName"></td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td id="applicantContactNumber"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td id="applicantEmail"></td>
+                            </tr>
+                            <tr>
+                                <th>Resume</th>
+                                <td>
+                                    <a 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="btn btn-sm btn-secondary"
+                                        id="viewResumeBtn"
+                                    >
+                                        <span>View Resume</span>
+                                        <i class="fas fa-file-alt ml-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+
+                    {# Score Sheet Pane #}
+                    <div 
+                        class="tab-pane fade" 
+                        id="custom-content-below-schedules" 
+                        role="tabpanel"
+                        aria-labelledby="custom-content-below-schedules-tab"
+                    >
+                        <table class="table table-bordered" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Question</th>
+                                    <th class="text-center" style="min-width: 5rem">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicantScoresheet">
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="py-5 text-center">
+                                            <div class="spinner-border text-primary my-3">
+                                                <div class="sr-only">Loading ...</div>
+                                            </div>
+                                            <div class="text-secondary">Loading ...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {# Applicant Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="applicantTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="applicantTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="applicantTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+
+                {# Hiring Field #}
+                <div id="hiringField">
+
+                    {# Applicant ID #}
+                    <input type="hidden" id="applicantID" name="applicantID">
+    
+                    {# Reject or Approve #}
+                    <label class="mt-3">Select decision for hiring</label>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <div class="custom-control custom-radio">
+                                <div class="icheck-danger d-inline">
+                                    <input 
+                                        type="radio" 
+                                        name="applicantStatus" 
+                                        id="rejectFromInterview"
+                                        value="Rejected from interview"
+                                    >
+                                    <label for="rejectFromInterview">Reject from interview</label>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <div class="icheck-success d-inline">
+                                    <input 
+                                        type="radio" 
+                                        name="applicantStatus" 
+                                        id="hiredApplicant"
+                                        value="Hired"
+                                    >
+                                    <label for="hiredApplicant">Hired this applicant</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Textarea for Reason of Rejecting Request #}
+                    <div class="mt-4" id="remarksField" style="display:none">
+                        <div class="form-group">
+                            <label for="reason">Please include reason for rejecting request<span class="text-danger"> *</span></label>
+                            <textarea 
+                                type="text" 
+                                name="remarks" 
+                                id="remarks" 
+                                class="form-control"
+                                rows=5
+                                placeholder="Type reason for rejecting applicant here"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="cancelApplicantHiringBtn" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    <span>Submit</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

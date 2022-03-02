@@ -27,7 +27,7 @@ def login(
     # Get user credentials
     user_credentials = db.query(InternalUser).filter(
         InternalUser.email == req.username
-    ).join(UserRole).filter(
+    ).join(Employee).join(UserRole).filter(
         UserRole.user_id == InternalUser.id
     ).join(Role).filter(
         UserRole.role_id == Role.id
@@ -64,8 +64,11 @@ def login(
     # Setup token data
     token_data = { 
         "user_id": user_credentials.id, 
+        "employee_id": user_credentials.employee_info.employee_id,
         "roles": roles
     }
+
+    print(token_data)
 
     # Setup access token
     access_token = generate_token(data = token_data, remember=remember)

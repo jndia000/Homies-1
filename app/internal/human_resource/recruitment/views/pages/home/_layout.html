@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+    <body class="layout-top-nav control-sidebar-slide-open layout-navbar-fixed">
+        <div class="wrapper">
+
+            {# Topbar #}
+            {% include 'pages/home/components/topbar.html' %}
+            
+            {# Content Wrapper#}
+            <div class="content-wrapper pb-5">
+                {% block content %}{% endblock %}
+            </div>
+
+            {# Footer #}
+            {% include 'pages/home/components/footer.html' %}
+        </div>
+
+
+        {% block page_modals %}{% endblock %}
+
+
+        {% include 'layouts/_scripts.html' %}
+        {% block page_scripts %}{% endblock %}
+    </body>
+{% endblock %}

@@ -14,7 +14,7 @@ template = Jinja2Templates(directory = "app/public/home/views")
 
 
 # Router
-router = APIRouter(tags = ["Authentication Web Route"])
+router = APIRouter()
 
 
 # Home Page
@@ -28,8 +28,11 @@ def home(req: Request):
 
 # Login Page
 @router.get("/login")
-def home(req: Request):
-    return template.TemplateResponse("content/login.html", {
-        "request": req,
-        "page_title": "Login"
-    })
+def home(req: Request, user_data: dict = Depends(get_token)):
+    if not user_data:
+        return template.TemplateResponse("content/login.html", {
+            "request": req,
+            "page_title": "Login"
+        })
+    else:
+        return RedirectResponse('/internal/home')

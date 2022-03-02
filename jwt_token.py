@@ -9,6 +9,7 @@ from pydantic import BaseModel
 # Token Data
 class TokenData(BaseModel):
     user_id: str
+    employee_id: str
     roles: Dict[str,str]
 
 
@@ -44,7 +45,7 @@ def verify_token(token: str):
         user_id: str = payload.get("user_id")
         employee_id: str = payload.get("employee_id")
         roles: str = payload.get("roles")
-        if not user_id or not employee_id or not roles:
+        if not user_id or not roles:
             raise credentials_exception
         return TokenData(
             user_id = user_id,

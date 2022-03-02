@@ -1,0 +1,188 @@
+{# Applicant Details Modal #}
+<div class="modal fade" id="applicantDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="applicantScreeningForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Applicant Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# Tabs #}
+                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="applicantDetailsTab" 
+                            data-toggle="pill" 
+                            href="#applicantDetailsPane" 
+                            role="tab" 
+                            aria-controls="custom-content-below-home" 
+                            aria-selected="true"
+                        >Applicant Details</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="applicantTimelineTab" 
+                            data-toggle="pill" 
+                            href="#applicantTimelinePane" 
+                            role="tab" 
+                            aria-controls="#applicantTimelinePane" 
+                            aria-selected="false"
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content" id="custom-content-below-tabContent">
+
+                    {# Applicant Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="applicantDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantDetailsTab"
+                    >
+                        <table class="table border-bottom">
+                            <tr>
+                                <th>Applicant Name</th>
+                                <td id="applicantFullName"></td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td id="applicantContactNumber"></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td id="applicantEmail"></td>
+                            </tr>
+                            <tr>
+                                <th>Resume</th>
+                                <td>
+                                    <a 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        class="btn btn-sm btn-secondary"
+                                        id="viewResumeBtn"
+                                    >
+                                        <span>View Resume</span>
+                                        <i class="fas fa-file-alt ml-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    {# Applicant Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="applicantTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="applicantTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="applicantTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Upload Signed Contract Modal #}
+<div class="modal fade" id="uploadSignedContractModal" data-backdrop="static">
+    <div class="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="signedContractForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-1"></i>
+                    <span>Upload Signed Contract</span>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                {# Applicant ID #}
+                <input type="hidden" id="applicantID" name="applicantID">
+
+                <div>
+                    <p>You are about to upload contract for <span class="font-weight-bold" id="uploadContractFor"></span></p>
+                </div>
+
+                {# Upload Signed Contract #}
+                <div class="form-group">
+                    <label for="resume">
+                        <span>Please upload the signed contract here</span>
+                        <small>in PDF file format</small>
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input 
+                                type="file" 
+                                class="custom-file-input" 
+                                id="signedContract"
+                                name="signedContract"
+                            >
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelSubmitContractBtn"
+                >Cancel</button>
+                <button type="submit" class="btn btn-primary" id="submitContractBtn">
+                    <i class="fas fa-file-export mr-1"></i>
+                    <span>Submit</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+{# Add General Interview Question Modal #}
+<div 
+    class="modal fade" 
+    id="addGeneralInterviewQuestionModal" 
+    data-backdrop="static" 
+    data-keyboard="false"
+>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="addGeneralInterviewQuestionForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Add General Interview Question</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <textarea class="form-control" rows="3" id="question" name="question" placeholder="Please type new interview question here"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelGeneralInterviewQuestionBtn"
+                >Cancel</button>
+                <button type="submit" id="addGeneralInterviewQuestionBtn" class="btn btn-primary">
+                    <span>Add</span>
+                    <i class="fas fa-plus ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# General Interview Question Details Modal #}
+<div class="modal fade" id="genInterviewQuestionDetailsModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-list text-secondary mr-2"></i>
+                    <span>General Interview Question Details</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <th>Question</th>
+                        <td id="interviewQuestion"></td>
+                    </tr>
+                    <tr>
+                        <th>Added By</th>
+                        <td id="interviewQuestionAddedBy"></td>
+                    </tr>
+                    <tr>
+                        <th>Added At</th>
+                        <td id="interviewQuestionAddedAt"></td>
+                    </tr>
+                    <tr>
+                        <th>Last Updated By</th>
+                        <td id="interviewQuestionUpdatedBy"></td>
+                    </tr>
+                    <tr>
+                        <th>Last Updated At</th>
+                        <td id="interviewQuestionUpdatedAt"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Edit General Interview Question Modal #}
+<div 
+    class="modal fade" 
+    id="editGeneralInterviewQuestionModal" 
+    data-backdrop="static" 
+    data-keyboard="false"
+>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="editGeneralInterviewQuestionForm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Edit General Interview Question</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                {# Interview Question ID #}
+                <input type="hidden" id="interviewQuestionID" name="interviewQuestionID">
+
+                {# Question #}
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <textarea class="form-control" rows="3" id="questionForEdit" name="question" placeholder="Please type new interview question here"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                    id="cancelGenInterviewQuestionBtnForEdit"
+                >Cancel</button>
+                <button type="submit" id="saveGenInterviewQuestionBtn" class="btn btn-info">
+                    <span>Save</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

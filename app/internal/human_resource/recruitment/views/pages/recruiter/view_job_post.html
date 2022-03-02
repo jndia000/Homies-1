@@ -1,0 +1,255 @@
+{% extends "pages/recruiter/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Content #}
+    <section class="content px-3">
+        
+        {# Job Post Details Loader #}
+        <div class="form-row" id="jobPostDetailsLoader">
+
+            {# Form #}
+            <div class="col-lg-8">
+                
+                {# Job Post Card #}
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <div class="skeleton-loader mb-0" style="width: 15rem"></div>
+                    </div>
+                    <div class="card-body">
+
+                        {# Job Summary #}
+                        <div class="mb-5">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="skeleton-loader w-50" style="height: 40px"></div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="skeleton-loader mb-0" style="width: 5rem"></div>
+                                <div class="skeleton-loader mx-3 mb-0" style="width: 2px"></div>
+                                <div class="skeleton-loader mb-0" style="width: 8rem"></div>
+                            </div>
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader w-50"></div>
+                        </div>
+
+                        {# Job Description #}
+                        <div class="mb-5">
+                            <div class="skeleton-loader w-50" style="height: 35px"></div>
+                            <div class="dropdown-divider"></div>
+
+                            {% for i in range(5) %}
+                                <div class="mb-5">
+                                    <div class="skeleton-loader"></div>
+                                    <div class="skeleton-loader"></div>
+                                    <div class="skeleton-loader"></div>
+                                    <div class="skeleton-loader w-50"></div>
+                                </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Details #}
+            <div class="col-lg-4">
+
+                {# Job Post Summary #}
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="skeleton-loader w-50 m-0"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Job Post Timeline #}
+                <div class="timeline wait">
+                    <div class="time-label">
+                        <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                    </div>
+                    <div>
+                        <i class="fas fa-circle bg-secondary"></i>
+                        <div class="timeline-item">
+                            
+                            <div class="timeline-header">
+                                <div class="skeleton-loader sm w-50 mb-0"></div>
+                            </div>
+
+                            <div class="timeline-body">
+                                <div class="small">
+                                    <div class="skeleton-loader sm"></div>
+                                    <div class="skeleton-loader sm w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fas fa-circle bg-secondary"></i>
+                        <div class="timeline-item">
+                            
+                            <div class="timeline-header">
+                                <div class="skeleton-loader sm w-50 mb-0"></div>
+                            </div>
+
+                            <div class="timeline-body">
+                                <div class="small">
+                                    <div class="skeleton-loader sm"></div>
+                                    <div class="skeleton-loader sm w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <i class="fas fa-clock bg-secondary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Job Post Details Container #}
+        <div class="form-row" id="jobPostDetailsContainer" style="display: none">
+
+            {# Job Post Details #}
+            <div class="col-lg-8">
+
+                {# Job Post Card #}
+                {% include 'components/job_post.html' %}
+            </div>
+            
+            {# Job Post Details & Manpower Request #}
+            <div class="col-lg-4">
+
+                {# Options Loader #}
+                <div class="card card-primary card-outline wait" id="optionsLoader">
+                    <div class="card-header">
+                        <div class="skeleton-loader mb-0" style="width: 8rem"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="skeleton-loader"></div>
+                        <div class="skeleton-loader"></div>
+                    </div>
+                </div>
+
+                {# Options Container #}
+                <div class="card card-primary card-outline" id="optionsContainer">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">Options</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-sm btn-default" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" id="jobPostOptions"></div>
+                </div>
+
+                {# Manpower Request Summary #}
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-title">Manpower Request</div>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-sm btn-default" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table w-100">
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Vacant Position</h6>
+                                    <div id="vacantPositionForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Staffs Needed</h6>
+                                    <div id="staffsNeededForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Employment Type</h6>
+                                    <div id="employmentTypeForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Salary Range</h6>
+                                    <div id="salaryRangeForSummary"></div>
+                                    <div id="salaryRangeStatus"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Deadline</h6>
+                                    <div id="deadlineForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button 
+                                        class="btn btn-sm btn-secondary btn-block"
+                                        data-toggle="modal"
+                                        data-target="#viewManpowerRequestModal"
+                                    >View Full Details</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                {# Job Post Timeline #}
+                <div class="timeline" id="jobPostTimeline"></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/recruiter/modals/view_job_post_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/recruiter/job_posts.js')}}"></script>
+{% endblock %}

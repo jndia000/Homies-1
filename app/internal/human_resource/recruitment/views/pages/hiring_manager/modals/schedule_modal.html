@@ -1,0 +1,65 @@
+{# Confirm Remove Applicant Modal #}
+<div class="modal" id="confirmRemoveApplicantModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="confirmRemoveApplicantForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to remove that applicant?</p>
+
+                <input type="hidden" id="applicantID" name="applicantID">
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal"
+                >Cancel</button>
+                <button type="submit" class="btn btn-danger" id="removeBtn">
+                    <span>Yes, remove it!</span>
+                    <i class="fas fa-times-circle ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Confirm Create Interview Schedule Modal #}
+<div class="modal" id="confirmCreateInterviewScheduleModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to create this schedule for selected interviewees?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal"
+                    id="cancelConfirmCreateInterviewScheduleBtn"
+                >Cancel</button>
+                <button type="button" class="btn btn-primary" id="createScheduleBtn">
+                    <span>Yes, create it!</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

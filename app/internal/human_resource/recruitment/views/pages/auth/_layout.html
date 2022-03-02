@@ -1,0 +1,12 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+<body class="hold-transition login-page bg-white">
+    
+    {% block content %}{% endblock %}
+    
+    {% include "layouts/_scripts.html" %}
+
+    {% block page_scripts %}{% endblock %}
+</body>
+{% endblock %}

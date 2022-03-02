@@ -1,0 +1,139 @@
+{# Onboarding Employee Task Details Modal #}
+<div class="modal fade" id="onboardingEmployeeTaskDetailsModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-alt text-secondary mr-2"></i>
+                    <span>Onboarding Task Details</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" id="closeLogoutModalBtn">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                {# Tabs #}
+                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+    
+                    {# Applicant Details #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link active" 
+                            id="taskDetailsTab" 
+                            data-toggle="pill" 
+                            href="#taskDetailsPane" 
+                            role="tab" 
+                            aria-controls="custom-content-below-home" 
+                            aria-selected="true"
+                        >Task Details</a>
+                    </li>
+
+                    {# Timeline #}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link" 
+                            id="taskTimelineTab" 
+                            data-toggle="pill" 
+                            href="#taskTimelinePane" 
+                            role="tab" 
+                            aria-controls="#applicantTimelinePane" 
+                            aria-selected="false"
+                        >Timeline</a>
+                    </li>
+                </ul>
+
+                {# Panes #}
+                <div class="tab-content" id="custom-content-below-tabContent">
+
+                    {# Onboarding Employee Task Details #}
+                    <div 
+                        class="tab-pane fade show active py-3" 
+                        id="taskDetailsPane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantDetailsTab"
+                    >
+                        <table class="table">
+                            <tr>
+                                <th>Task Title</th>
+                                <td id="taskTitle"></td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td id="taskDescription"></td>
+                            </tr>
+                            <tr>
+                                <th>Assigned for</th>
+                                <td id="taskType"></td>
+                            </tr>
+                            <tr>
+                                <th>Started at</th>
+                                <td id="taskStart"></td>
+                            </tr>
+                            <tr>
+                                <th>Will end or ended at</th>
+                                <td id="taskEnd"></td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td id="taskStatus"></td>
+                            </tr>
+                            <tr>
+                                <th>Progress</th>
+                                <td id="progress"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    {# Onboarding Employee Task Timeline #}
+                    <div 
+                        class="tab-pane fade py-3" 
+                        id="taskTimelinePane" 
+                        role="tabpanel" 
+                        aria-labelledby="applicantTimelineTab"
+                    >
+                        {# Timeline Loader #}
+                        <div class="timeline wait" id="onboardingEmployeeTaskTimelineLoader">
+                            <div class="time-label">
+                                <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                            </div>
+                            
+                            {% for i in range(2) %}
+                                <div>
+                                    <i class="fas fa-circle bg-secondary"></i>
+                                    <div class="timeline-item">
+                                        
+                                        <div class="timeline-header">
+                                            <div class="skeleton-loader sm w-50 mb-0"></div>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <div class="small">
+                                                <div class="skeleton-loader sm"></div>
+                                                <div class="skeleton-loader sm w-50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div>
+                                <i class="fas fa-clock bg-secondary"></i>
+                            </div>
+                        </div>
+
+                        {# Timeline #}
+                        <div class="timeline" id="onboardingEmployeeTaskTimeline" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    data-dismiss="modal" 
+                >Close</button>
+            </div>
+        </div>
+    </div>
+</div>

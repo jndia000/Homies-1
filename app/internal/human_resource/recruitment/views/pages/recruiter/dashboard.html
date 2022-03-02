@@ -1,0 +1,278 @@
+{% extends "pages/recruiter/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+                <h1>{{ page_title }}</h1>
+                <p class="text-muted">{{ sub_title }}</p>
+            </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Filter #}
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                
+                {# Date Range Filter #}
+                <div class="d-flex">
+                    <div class="form-group mb-0 mr-1">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-default float-right" id="filterDate">
+                                <span class="mr-1" id="selectedFilter">Select date</span>
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white">
+                                    <span id="selectedDate">
+                                        <div class="spinner-border spinner-border-sm"></div>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Refresh Button #}
+                <div>
+                    <button class="btn btn-sm btn-default" onclick="location.reload()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            {# Info Cards #}
+            <div class="row">
+
+                {# Job Posts Count #}
+                <div class="col-lg-6">
+                    <div class="small-box" style="background: white;">
+                        <div class="inner">
+                            <h3 class="text-primary mb-1" id="jobPostsCount">
+                                <span class="spinner-border"></span>
+                            </h3>
+                            <p class="font-weight-bold">Job Posts</p>
+                        </div>
+                        <div class="icon text-primary" style="opacity: 50%;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <a href="job-posts" class="small-box-footer bg-primary">
+                            <span>More info</span>
+                            <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                {# Applicants Count #}
+                <div class="col-lg-6">
+                    <div class="small-box" style="background: white;">
+                        <div class="inner">
+                            <h3 class="text-warning mb-1" id="applicationsCount">
+                                <span class="spinner-border"></span>
+                            </h3>
+                            <p class="font-weight-bold">Applications</p>
+                        </div>
+                        <div class="icon text-warning" style="opacity: 50%;">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <a href="applicants" class="small-box-footer bg-warning">
+                            <span>More info</span>
+                            <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {# Job Posts #}
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="card-title">Job Posts</h5>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Job Posts Status</p>
+                            <div class="chart">
+                                <canvas id="jobPostsStatusPieChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="font-weight-bold">Job Posts Created</p>
+
+                            <div class="chart">
+                                <canvas id="jobPostsBarChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+
+                        {# Total Job Posts #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-primary">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <h5 class="description-header text-primary" id="totalJobPostsCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">TOTAL JOB POSTS</span>
+                            </div>
+                        </div>
+
+                        {# On Going #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-warning">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <h5 class="description-header text-warning" id="onGoingCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">ON GOING</span>
+                            </div>
+                        </div>
+
+                        {# Closed/Ended #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-danger">
+                                <i class="fas fa-check-double"></i>
+                            </span>
+                            <h5 class="description-header text-danger" id="endedCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">CLOSED/ENDED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Applications #}
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="card-title">Applications</h5>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        {# Number of Applications #}
+                        <div class="col-md-8">
+                            <p class="font-weight-bold">Number of Applications</p>
+
+                            <div class="chart">
+                                <canvas id="applicantsLineChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+
+                        {# Application Status #}
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Application Status</p>
+                            <div class="chart">
+                                <canvas id="applicationStatusPieChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+
+                        {# Total Applications #}
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-primary">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <h5 class="description-header text-primary" id="totalApplicationsCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">TOTAL APPLICATIONS</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-warning">
+                                <i class="fas fa-user-cog"></i>
+                            </span>
+                            <h5 class="description-header text-warning" id="forEvaluationCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">FOR EVALUATION</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-success">
+                                <i class="fas fa-user-check"></i>
+                            </span>
+                            <h5 class="description-header text-success" id="evaluatedCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">EVALUATED</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                            <span class="description-percentage text-danger">
+                                <i class="fas fa-user-times"></i>
+                            </span>
+                            <h5 class="description-header text-danger" id="rejectedCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">REJECTED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/recruitment/recruiter/dashboard.js')}}"></script>
+{% endblock %}

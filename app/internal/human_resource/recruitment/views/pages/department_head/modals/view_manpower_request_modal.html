@@ -1,0 +1,63 @@
+{# Confirm Sign Reuqest Modal #}
+<div class="modal" id="confirmSignRequestModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="signRequestForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Confirmation</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to sign it now?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" id="cancelSignRequestBtn">Cancel</button>
+                <button class="btn btn-primary" id="submitSignRequestBtn">
+                    <span>Yes, sign it!</span>
+                    <i class="fas fa-file-signature ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{# Reject Request Modal #}
+<div class="modal" id="rejectRequestModal" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="rejectRequestForm">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-secondary">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Reject Request</span>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="remarks">Please insert remarks for rejecting this request</label>
+                    <textarea 
+                        name="remarks" 
+                        id="remarks" 
+                        rows="5" 
+                        class="form-control"
+                        placeholder="Please type the remarks here..."
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelRejectRequestBtn">Cancel</button>
+                <button type="submit" class="btn btn-danger" id="submitRejectRequestBtn">
+                    <span>Submit</span>
+                    <i class="fas fa-check ml-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
