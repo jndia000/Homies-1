@@ -62,6 +62,7 @@ class InternalUser(Base):
     roles = relationship('UserRole', back_populates='user')
     employee_info = relationship('Employee', back_populates = 'user_credentials')
 
+
 class Role(Base):
     __tablename__ = 'roles'
 
@@ -82,6 +83,7 @@ class UserRole(Base):
 
     user = relationship('InternalUser', back_populates='roles')
     role = relationship('Role', back_populates='users')
+
 
 #** INTERNAL USER PROFILE? di ko alam kung pano ginawa nyo dito, external ako
 #? Employees na yung magsisilbing User Profile for Internal Users

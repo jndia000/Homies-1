@@ -28,11 +28,8 @@ def home(req: Request):
 
 # Login Page
 @router.get("/login")
-def home(req: Request, user_data: dict = Depends(get_token)):
-    if not user_data:
-        return template.TemplateResponse("content/login.html", {
-            "request": req,
-            "page_title": "Login"
-        })
-    else:
-        return RedirectResponse('/internal/home')
+def home(req: Request):
+    return template.TemplateResponse("content/login.html", {
+        "request": req,
+        "page_title": "Login"
+    })
