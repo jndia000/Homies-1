@@ -21,7 +21,6 @@ ifSelectorExist('#addManpowerRequestForm', () => {
     /** Vacant Position For Add Select2 */
     GET_ajax(`${ ROUTE.API.DM }positions`, {
         success: result => {
-            console.log(result)
             if(result) {
                 let vacantPosition = $('#vacantPosition');
                 vacantPosition.empty();

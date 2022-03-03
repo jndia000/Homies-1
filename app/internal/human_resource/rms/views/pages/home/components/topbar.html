@@ -2,9 +2,9 @@
     <div class="container">
 
         {# Brand #}
-        <a href="#" class="navbar-brand order-0">
+        <a href="/" class="navbar-brand order-0">
             <img 
-                src="{{BASE_URL_WEB}}static/dist/img/AdminLTELogo.png" 
+                src="{{url_for('dist', path='img/AdminLTELogo.png')}}" 
                 alt="HoMIES" 
                 class="brand-image img-circle" 
                 style="opacity: .8"
@@ -94,12 +94,12 @@
                     >About Us</a>
 
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">Vision & Mission</a></li>
-                        <li><a href="#" class="dropdown-item">History</a></li>
+                        <li><a href="/vision-and-mission" class="dropdown-item">Vision & Mission</a></li>
+                        <li><a href="/history" class="dropdown-item">History</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-item">Data Privacy</a></li>
-                        <li><a href="#" class="dropdown-item">Terms and Conditions</a></li>
-                        <li><a href="#" class="dropdown-item">FAQ</a></li>
+                        <li><a href="/data-privacy" class="dropdown-item">Data Privacy</a></li>
+                        <li><a href="/terms-and-conditions" class="dropdown-item">Terms and Conditions</a></li>
+                        <li><a href="/faq" class="dropdown-item">FAQ</a></li>
                     </ul>
                 </li>
 

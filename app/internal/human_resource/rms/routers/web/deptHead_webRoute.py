@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from jwt_token import get_token
 from sqlalchemy.orm import Session
 from database import get_db
-from oauth2 import hasAccess
+from oauth2 import hasAccess, isAuthorized, get_user
 from fastapi.templating import Jinja2Templates
 
 # Import Models

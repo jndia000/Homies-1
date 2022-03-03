@@ -10,22 +10,18 @@
 
     {# Top Navbar #}
     <nav class="main-header navbar navbar-expand-md navbar-white navbar-light">
-      {% block topbar %}{% endblock %}
+      {% include "components/topbar.html" %}
     </nav>
 
     {# Main Sidebar Container #}
     <aside class="main-sidebar main-sidebar-custom sidebar-light-primary">
 
       {# Brand Logo #}
-      <div class="brand-link">
-        <img 
-          src="{{BASE_URL_WEB}}static/dist/img/AdminLTELogo.png" 
-          alt="AdminLTE Logo" 
-          class="brand-image img-circle"
-          style="opacity: .8"
-        >
-        <span class="brand-text font-weight-light">{{BRAND_NAME}}</span>
-      </div>
+      <a href="/internal/home" class="brand-link">
+        <img src="{{url_for('dist', path='/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
+            class="brand-image img-circle border" style="opacity: .8">
+        <span class="brand-text font-weight-light">HoMIES</span>
+      </a>
 
       {% block sidebar %}{% endblock %}
 
@@ -50,7 +46,7 @@
   {% include "pages/auth/modals/logout_modal.html" %}
 
   {# Scripts #}
-  {% include "layouts/_scripts.html" %}
+  {% include "layouts/scripts.html" %}
   {% block scripts %}{% endblock %}
 
   {# Logout Script for Users #}

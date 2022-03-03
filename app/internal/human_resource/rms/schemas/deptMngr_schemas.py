@@ -119,13 +119,13 @@ class Applicant(BaseModel):
 # Show Applicant
 class ShowApplicant(Applicant):
     status: str
-    evaluation_done_by: Optional[ShowUserInfo]
+    applicant_evaluated_by: Optional[ShowUserInfo]
     evaluated_at: Optional[datetime]
-    screening_done_by: Optional[ShowUserInfo]
+    applicant_screened_by: Optional[ShowUserInfo]
     screened_at: Optional[datetime]
     hired_at: Optional[datetime]
-    hiring_done_by: Optional[ShowUserInfo]
-    rejection_done_by: Optional[ShowUserInfo]
+    applicant_hired_by: Optional[ShowUserInfo]
+    applicant_rejected_by: Optional[ShowUserInfo]
     rejected_at: Optional[datetime]
     created_at: datetime
     updated_at: Optional[datetime]

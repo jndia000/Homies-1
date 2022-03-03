@@ -85,8 +85,8 @@ class UserRole(Base):
     role = relationship('Role', back_populates='users')
 
 
-#** INTERNAL USER PROFILE? di ko alam kung pano ginawa nyo dito, external ako
-#? Employees na yung magsisilbing User Profile for Internal Users
+# * INTERNAL USER PROFILE
+# ? Employees (table) na yung magsisilbing User Profile for Internal Users
 
 
 # ! CORE HOSPITAL

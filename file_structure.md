@@ -56,27 +56,29 @@
 
 ## Per Subsystem
 
+For specific folders: `/app/internal`, `/static/src/{css|js|img|files}/{internal|public}`
+
 ```
 📦Specific Folder
  ┣ 📂core
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
  ┣ 📂finance
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
  ┣ 📂human_resouce
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
- ┃ ┣ 📂internal
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
+ ┃ ┣ 📂{abbr. subsystem}
  ┗ 📂logistics
-   ┣ 📂internal
-   ┣ 📂internal
-   ┣ 📂internal
-   ┗ 📂internal
+   ┣ 📂{abbr. subsystem}
+   ┣ 📂{abbr. subsystem}
+   ┣ 📂{abbr. subsystem}
+   ┗ 📂{abbr. subsystem}
 
 ```

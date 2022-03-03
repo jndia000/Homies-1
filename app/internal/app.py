@@ -2,7 +2,6 @@
 from fastapi import FastAPI
 
 
-
 # App Instance
 internalApp = FastAPI()
 

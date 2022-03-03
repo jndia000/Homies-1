@@ -26,11 +26,12 @@ def get_user(token: str = Depends(oauth2_scheme)):
 def isAuthorized(user_data, subsystem: str, role: str):
     if subsystem in user_data.roles and user_data.roles[subsystem] == role:
         return True
-    raise HTTPException(
-        status_code = 401,
-        detail = "Unauthorized",
-        headers = {"WWW-Authenticate": "Bearer"}
-    )
+    else:
+        raise HTTPException(
+            status_code = 401,
+            detail = "Unauthorized",
+            headers = {"WWW-Authenticate": "Bearer"}
+        )
 
 
 # Has Access

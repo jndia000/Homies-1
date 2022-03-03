@@ -516,7 +516,7 @@ const getJobPostDetails = () => GET_ajax(`${ ROUTE.API.R }job-posts/${ jobPostID
             `
         
             return `
-                <a class="btn btn-sm btn-secondary btn-block" target="_blank" href="${ BASE_URL_WEB }careers/${ jobPostID }">
+                <a class="btn btn-sm btn-secondary btn-block" target="_blank" href="/careers/${ jobPostID }">
                     ${ TEMPLATE.ICON_LABEL('eye', 'View post in public portal') }
                 </a>
                 <a class="btn btn-sm btn-secondary btn-block" href="${ ROUTE.WEB.R }job-posts/${ jobPostID }/applicants">

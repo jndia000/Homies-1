@@ -332,8 +332,6 @@ const renderData = (start, end) => {
     GET_ajax(`${ ROUTE.API.H }applicants/analytics${ DATE_RANGE }`, {
         success: result => {
 
-            console.log(result)
-
             // Set info card content
             setContent('#applicationsCountForInfoCard', result.total)
 

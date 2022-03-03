@@ -9,9 +9,10 @@
 
 /** Get User Information */
 (() => {
-    const userInfo = JSON.parse(sessionStorage.getItem('user_info'));
+    let userInfo = JSON.parse(sessionStorage.getItem('user_info'));
 
     const setUserInfo = () => {
+        userInfo = JSON.parse(sessionStorage.getItem('user_info'));
         setContent({
             '#userFullName': userInfo["fullName"],
             '#userPosition': userInfo["position"],

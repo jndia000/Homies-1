@@ -551,22 +551,39 @@ initDataTable('#intervieweesDT', {
         {
             data: null,
             render: data => {
-                const intervieweeID = data.interviewee_id
+                const intervieweeID = data.interviewee_id;
+                const isInterviewed = data.is_interviewed;
 
                 const viewIntervieweeDetails = () => {
-                    return `
-                        <div 
-                            class="dropdown-item d-flex"
-                            role="button"
-                            onclick="viewIntervieweeDetails('${ intervieweeID }')"                  
-                        >
-                            <div style="width: 2rem"><i class="fas fa-user-tie mr-1"></i></div>
-                            <div>
-                                <div>View Interviewee Details</div>
-                                ${ TEMPLATE.SUBTEXT('View the details of this interviewee') }
+                    if(isInterviewed) {
+                        return `
+                            <div 
+                                class="dropdown-item d-flex"
+                                role="button"
+                                onclick="viewIntervieweeDetails('${ intervieweeID }')"                  
+                            >
+                                <div style="width: 2rem"><i class="fas fa-user-tie mr-1"></i></div>
+                                <div>
+                                    <div>Evaluate this applicant</div>
+                                    ${ TEMPLATE.SUBTEXT('Hire or reject this applicant') }
+                                </div>
                             </div>
-                        </div>
-                    `
+                        `;
+                    } else {
+                        return `
+                            <div 
+                                class="dropdown-item d-flex"
+                                role="button"
+                                onclick="viewIntervieweeDetails('${ intervieweeID }')"                  
+                            >
+                                <div style="width: 2rem"><i class="fas fa-user-tie mr-1"></i></div>
+                                <div>
+                                    <div>View Interviewee Details</div>
+                                    ${ TEMPLATE.SUBTEXT('View the details of this interviewee') }
+                                </div>
+                            </div>
+                        `;
+                    }
                 }
 
                 if(isEmptyOrNull(data.is_interviewed)) {
@@ -609,8 +626,6 @@ const viewIntervieweeDetails = (intervieweeID) => {
             const applicant = result.applicant_info;
             const applicant_status = applicant.status;
             
-            console.log(result)
-
             /**
              * Load Interviewee Details
              * Not yet interviewed
@@ -747,7 +762,7 @@ onHideModal('#intervieweeDetailsModal', () => {
 
 /** On Interviewed Details Modal has been hidden */
 onHideModal('#interviewedDetailsModal', () => {
-    $('#intervieweeDetailsTab').tab('show');
+    $('#interviewedDetailsTab').tab('show');
 
     // Reset Form
     resetForm('#interviewedApplicantHiringForm');
@@ -765,6 +780,12 @@ onHideModal('#interviewedDetailsModal', () => {
             </td>
         </tr>
     `);
+
+    // Hide Remarks Field
+    hideElement('#remarksField');
+
+    // Disable submit btn
+    disableElement('#submitBtn');
 
     // Remove Applicant Timeline Loader
     showElement('#interviewedTimelineLoader');

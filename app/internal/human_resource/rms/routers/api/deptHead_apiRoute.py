@@ -34,7 +34,7 @@ def get_user_info(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             user_info = db.query(Employee).filter(Employee.employee_id == user_data.employee_id).first()
             if not user_info:
                 raise HTTPException(status_code = 404, detail = {"message": "Employee does not exist"})
@@ -400,7 +400,7 @@ def upload_employment_contract(
             orig_filename = f"{file.filename}"
             file_extension = orig_filename.split('.')[-1]
             new_filename = uuid.uuid4().hex
-            file_location = f"static/src/files/internal/human_resource/recruitment/employment_contracts/{new_filename}.{file_extension}"
+            file_location = f"static/src/files/internal/human_resource/rms/employment_contracts/{new_filename}.{file_extension}"
             with open(file_location, "wb") as fileObj:
                 shutil.copyfileobj(file.file, fileObj)
             return {

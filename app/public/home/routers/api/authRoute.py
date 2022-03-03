@@ -68,8 +68,6 @@ def login(
         "roles": roles
     }
 
-    print(token_data)
-
     # Setup access token
     access_token = generate_token(data = token_data, remember=remember)
 

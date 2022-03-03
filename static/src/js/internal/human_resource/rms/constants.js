@@ -14,9 +14,9 @@ const BASE_PUBLIC_API = ORIGIN + 'api/';
 
 
 // Web File URLs
-const URL_WEB_FILES = `${ BASE_URL_WEB }src/files/`;
-const URL_RESUME_FILES = `${ URL_WEB_FILES }internal/human_resource/recruitment/resumes/`;
-const EMPLOYMENT_CONTRACT_PATH = `${ URL_WEB_FILES }internal/human_resource/recruitment/employment_contracts/`;
+const URL_WEB_FILES = `${ ORIGIN }src/files/`;
+const URL_RESUME_FILES = `${ URL_WEB_FILES }internal/human_resource/rms/resumes/`;
+const EMPLOYMENT_CONTRACT_PATH = `${ URL_WEB_FILES }internal/human_resource/rms/employment_contracts/`;
 
 
 // User Routes

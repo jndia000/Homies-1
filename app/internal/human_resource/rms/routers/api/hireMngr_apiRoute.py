@@ -42,7 +42,7 @@ def get_user_info(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             user_info = db.query(Employee).filter(Employee.employee_id == user_data.employee_id).first()
             if not user_info:
                 raise HTTPException(status_code = 404, detail = {"message": "Employee does not exists"})
@@ -68,7 +68,7 @@ def get_all_manpower_requests(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(ManpowerRequest).filter(or_(
                 ManpowerRequest.request_status == "For approval",
                 ManpowerRequest.request_status == "Approved",
@@ -88,7 +88,7 @@ def manpower_requests_analytics(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             query = db.query(ManpowerRequest)
 
             for_approval_query = query.filter(ManpowerRequest.request_status == "For approval")
@@ -132,7 +132,7 @@ def manpower_requests_data(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
 
             target_column = cast(ManpowerRequest.created_at, Date)
 
@@ -165,7 +165,7 @@ def get_one_requisition(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             requisition = db.query(ManpowerRequest).filter(
                 ManpowerRequest.manpower_request_id == manpower_request_id,
                 or_(
@@ -192,7 +192,7 @@ def manpower_request_approval(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             manpower_request = db.query(ManpowerRequest).filter(ManpowerRequest.manpower_request_id == manpower_request_id)
             if not manpower_request.first():
                 raise HTTPException(status_code=404, detail=MANPOWER_REQUEST_NOT_FOUND_RESPONSE)
@@ -232,7 +232,7 @@ def get_all_job_posts(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(JobPost).all()
     except Exception as e:
         print(e)
@@ -247,7 +247,7 @@ def job_posts_analytics(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             query = db.query(JobPost)
 
             total_query = query
@@ -282,7 +282,7 @@ def job_posts_data(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             job_posts_query = db.query(
                 cast(JobPost.created_at, Date).label("created_at"), 
                 func.count(JobPost.job_post_id).label("total")
@@ -307,7 +307,7 @@ def get_one_job_post(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             job_post = db.query(JobPost).filter(JobPost.job_post_id == job_post_id).first()
             if not job_post:
                 raise HTTPException(status_code = 404, detail = JOB_POST_NOT_FOUND_RESPONSE)
@@ -334,7 +334,7 @@ def get_all_applicants_per_job(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(Applicant.job_post_id == job_post_id).all()
     except Exception as e:
         print(e)
@@ -347,7 +347,7 @@ def get_all_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).all()
     except Exception as e:
         print(e)
@@ -362,7 +362,7 @@ def applicants_analytics(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             query = db.query(Applicant)
 
             total_query = query
@@ -419,7 +419,7 @@ def applicants_data(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             applicants_query = db.query(
                 cast(Applicant.created_at, Date).label("created_at"), 
                 func.count(Applicant.applicant_id).label("total")
@@ -444,7 +444,7 @@ def get_one_applicant(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id).first()
             if not applicant:
                 raise HTTPException(status_code=404, detail=APPLICANT_NOT_FOUND_RESPONSE)
@@ -462,7 +462,7 @@ def get_one_applicant(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id).first()
             if not applicant:
                 raise HTTPException(status_code=404, detail=APPLICANT_NOT_FOUND_RESPONSE)
@@ -487,7 +487,7 @@ def applicants_per_job_analytics(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             query = db.query(Applicant)
 
             total = query.filter(Applicant.job_post_id == job_post_id).count()
@@ -563,7 +563,7 @@ def evaluated_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(
                 Applicant.job_post_id == job_post_id,
                 Applicant.status == 'For screening'
@@ -580,7 +580,7 @@ def evaluated_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(
                 Applicant.job_post_id == job_post_id,
                 Applicant.status == 'For interview'
@@ -600,7 +600,7 @@ def evaluated_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(
                 Applicant.job_post_id == job_post_id,
                 Applicant.status == 'For interview'
@@ -620,7 +620,7 @@ def evaluated_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(
                 Applicant.job_post_id == job_post_id,
                 or_(
@@ -640,7 +640,7 @@ def evaluated_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(Applicant).filter(
                 Applicant.job_post_id == job_post_id,
                 or_(
@@ -661,7 +661,7 @@ def update_applicant_status(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id)
             if not applicant.first():
                 raise HTTPException(status_code = 404, detail = APPLICANT_NOT_FOUND_RESPONSE)
@@ -747,7 +747,7 @@ def update_applicant_status(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id)
             if not applicant.first():
                 raise HTTPException(status_code = 404, detail = APPLICANT_NOT_FOUND_RESPONSE)
@@ -847,7 +847,7 @@ def get_interview_schedules_per_job_post(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             if not db.query(JobPost).filter(JobPost.job_post_id == job_post_id).first():
                 raise HTTPException(status_code=404, detail=JOB_POST_NOT_FOUND_RESPONSE)
             else:
@@ -867,7 +867,7 @@ def create_interview_question(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             new_interview_question = InterviewQuestion(
                 question = req.question,
                 type = req.type,
@@ -892,7 +892,7 @@ def get_all_general_interview_questions(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(InterviewQuestion).filter(InterviewQuestion.type == "General").all()
     except Exception as e:
         print(e)
@@ -906,7 +906,7 @@ def get_one_interview_question(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             interview_question = db.query(InterviewQuestion).filter(InterviewQuestion.interview_question_id == interview_question_id).first()
             if not interview_question:
                 raise HTTPException(status_code=404, detail=INTERVIEW_QUESTION_NOT_FOUND_RESPONSE)
@@ -925,7 +925,7 @@ def update_interview_question(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             interview_question = db.query(InterviewQuestion).filter(InterviewQuestion.interview_question_id == interview_question_id)
             if not interview_question.first():
                 raise HTTPException(status_code=404, detail=INTERVIEW_QUESTION_NOT_FOUND_RESPONSE)
@@ -944,7 +944,7 @@ def create_interview_schedule(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             
             # Create Interview Schedule
             new_interview_schedule = InterviewSchedule(
@@ -1034,7 +1034,7 @@ def interview_schedules_and_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             return db.query(InterviewSchedule).filter(
                 InterviewSchedule.set_by == user_data.employee_id
             ).all()
@@ -1049,7 +1049,7 @@ def interview_schedules_and_applicants(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             
             interview_schedule = db.query(InterviewSchedule).filter(
                 InterviewSchedule.interview_schedule_id == interview_schedule_id
@@ -1071,7 +1071,7 @@ def interviewees_per_schedule(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             if not interview_schedule_id:
                 raise HTTPException(status_code=404, detail=INTERVIEW_SCHEDULE_NOT_FOUND_RESPONSE)
             else:
@@ -1092,7 +1092,7 @@ def create_general_interviewee_scores(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             interviewee = db.query(Interviewee).filter(Interviewee.interviewee_id == interviewee_id).first()
             if not interviewee:
                 raise HTTPException(status_code=404, detail=INTERVIEWEE_NOT_FOUND_RESPONSE)
@@ -1119,7 +1119,7 @@ def get_one_intervieweee(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             interviewee = db.query(Interviewee).filter(Interviewee.interviewee_id == interviewee_id).first()
             if not interviewee:
                 raise HTTPException(status_code=404, detail=INTERVIEWEE_NOT_FOUND_RESPONSE)
@@ -1138,7 +1138,7 @@ def update_interviewee(
     user_data: UserData = Depends(get_user)
 ):
     try:
-        if(isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE)):
+        if isAuthorized(user_data, AUTHORIZED_SUBSYSTEM, AUTHORIZED_ROLE):
             interviewee = db.query(Interviewee).filter(Interviewee.interviewee_id == interviewee_id)
             if not interviewee.first():
                 raise HTTPException(status_code=404, detail=INTERVIEWEE_NOT_FOUND_RESPONSE)

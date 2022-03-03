@@ -26,7 +26,7 @@ def generate_token(data: dict, remember: bool, expires_delta: Optional[timedelta
         expires_delta = 31536000
 
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.utcnow() + timedelta(minutes=expires_delta)
     else:
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
@@ -67,4 +67,3 @@ def get_token(access_token: str = Cookie('access_token')):
             raise HTTPException(status_code = 401, detail = "Invalid token")
     except JWTError:
         raise HTTPException(status_code = 401, detail = "Please login first")
-        

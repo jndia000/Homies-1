@@ -1,11 +1,5 @@
 # Import Packages
-from typing import Optional
-from fastapi import APIRouter, Request, Depends
-from fastapi.responses import RedirectResponse
-from fastapi.responses import HTMLResponse
-from jwt_token import get_token
-from sqlalchemy.orm import Session
-from database import get_db
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 
 

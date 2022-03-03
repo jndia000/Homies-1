@@ -9,9 +9,10 @@
 
 /** Get User Information */
 (() => {
-    const userInfo = JSON.parse(sessionStorage.getItem('user_info'));
-
+    let userInfo = JSON.parse(sessionStorage.getItem('user_info'));
+    
     const setUserInfo = () => {
+        userInfo = JSON.parse(sessionStorage.getItem('user_info'));
         setContent({
             '#userFullName': userInfo["fullName"],
             '#userPosition': userInfo["position"],
@@ -35,7 +36,7 @@
                         "position": result.position.name,
                         "department": result.position.sub_department.name
                     }));
-                    setUserInfo()
+                    setUserInfo();
                 } else toastr.error('There was an error while getting your information');
             },
             error: () => toastr.error('There was an error while getting your information')

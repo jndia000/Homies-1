@@ -37,7 +37,7 @@ AUTHORIZED_ROLE = "Department Manager"
 
 
 # Redirect Root
-REDIRECT_ROOT = "/rms/dm"
+REDIRECT_ROOT = "/rms/dm/"
 
 
 # ===========================================================
