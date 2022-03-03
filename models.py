@@ -86,7 +86,266 @@ class UserRole(Base):
 
 # ! CORE HOSPITAL
 
-# ???
+# FROM PATIENT MANAGEMENT
+    # Medical History Model
+class MedicalHistory(Base):
+    __tablename__ = 'medical_history'
+
+    medical_history_number = Column(String(36), primary_key=True, default=text('UUID()'))
+    prev_diagnosis = Column(String(255), nullable=True)
+    prev_treatments = Column(String(255), nullable=True)
+    prev_surgeries = Column(String(255), nullable=True)
+    prev_medications = Column(String(255), nullable=True)
+    allergies = Column(String(255), nullable=True)
+    health_conditions = Column(String(255), nullable=True)
+    special_privillages = Column(String(255), nullable=True)
+    created_at = Column(DateTime, default=text('NOW()'))
+    updated_at = Column(DateTime, onupdate=text('NOW()'))
+
+    historyFK               = relationship('PatientRegistration', back_populates="historyrecordFK")
+
+    # Patient Model 
+class PatientRegistration(Base):
+    __tablename__ = 'patient_registration'
+
+
+    id = Column(String(36), primary_key=True, default=text('UUID()'))
+    first_name = Column(String(255), nullable=False)
+    middle_name = Column(String(255), nullable=False)
+    last_name = Column(String(255), nullable=False)
+    sex = Column(String(255), nullable=False)
+    birthday = Column(Date, nullable=False)
+    weight = Column(String(255), nullable=False)
+    height = Column(String(255), nullable=False)
+    blood_type = Column(String(255), nullable=False)
+    guardian = Column(String(255), nullable=False)
+    address = Column(String(255), nullable=False)
+    contact_number = Column(String(255), nullable=False)
+    hospital_employee = Column(String(255), nullable=False)
+    medical_history_number = Column(String(36), ForeignKey('medical_history.medical_history_number'), nullable=True)
+    # dp_id = Column(String(36), ForeignKey('discount_privillages.dp_id'), nullable=True)
+    status = Column(String(255),nullable=True, default="Active")
+    patient_type = Column(String(255), nullable=True)
+    created_at = Column(DateTime, default=text('NOW()'))
+    updated_at = Column(DateTime, onupdate=text('NOW()'))
+    
+
+    patientFK             = relationship('Record', back_populates="patientrecordFK")
+    # patientdischargeFK    = relationship('Discharge', back_populates="dischargeFK")
+
+    # patient_profilesFK    = relationship('UserProfile', back_populates='patientProfileFK')
+    # patientrequestFK      = relationship('Request', back_populates='requesterFK')
+
+    historyrecordFK         = relationship('MedicalHistory', back_populates="historyFK")
+
+    # Doctor Model
+class Doctor(Base):
+    __tablename__ = 'doctors'
+
+    id          = Column(String(36), primary_key=True, default=text('UUID()'))
+    first_name      = Column(String(255), nullable=False)
+    middle_name     = Column(String(255), nullable=True)
+    last_name       = Column(String(255), nullable=False)
+    department      = Column(String(255), nullable=False)
+    contact_number  = Column(String(255), nullable=False)
+    region          = Column(String(255), nullable=False)
+    street          = Column(String(255), nullable=False)
+    barangay        = Column(String(255), nullable=False)
+    municipality    = Column(String(255), nullable=False)
+    province        = Column(String(255), nullable=False)
+    active_status   = Column(String(255), nullable=False, default="Active")
+    created_at      = Column(DateTime, default=text('NOW()'))
+    updated_at      = Column(DateTime, onupdate=text('NOW()'))
+
+    diagnosisdocFK        = relationship('Diagnosis', back_populates="docdiagnosisFK")
+    progressnoteFK        = relationship('ProgressNote', back_populates="docentryFK")
+    # doctorprescriptionFK  = relationship('Prescription', back_populates="docprescriptionFK") 
+
+# ? MEDICAL RECORDS
+    # Record Model
+class Record(Base):
+    __tablename__ = 'patient_records'
+
+    id                      = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_id              = Column(String(36), ForeignKey('patient_registration.id'))
+    created_at              = Column(DateTime, default=text('NOW()'))
+    updated_at              = Column(DateTime, onupdate=text('NOW()'))
+
+    patientrecordFK         = relationship('PatientRegistration', back_populates="patientFK")
+    problemrecordFK         = relationship('Problem', back_populates="problemFK")
+    diagnosisrecordFK       = relationship('Diagnosis', back_populates="diagnosisrecFK")
+    # labresultrecordFK       = relationship('LabResult', back_populates="labresultFK")
+    # surgeryrecordFK         = relationship("Surgery", back_populates="surgeryFK")
+    # prescriptionrecordFK    = relationship('Prescription', back_populates="prescriptionsFK")
+    progressnoterecordFK    = relationship('ProgressNote', back_populates="progressnoteFK")
+
+    record_allergyFK        = relationship('Allergy', back_populates="allergiesFK")
+    record_immunizationFK   = relationship('Immunization', back_populates="immunizationsFK")
+    record_medicationFK     = relationship('Medication', back_populates="medicationsFK")
+    record_attachmentFK     = relationship('Attachment', back_populates="attachmentsFK")
+
+    call_logrecordFK        = relationship('CallLog', back_populates="call_logFK")
+
+
+    # Problem Model
+class Problem(Base):
+    __tablename__ = 'problems'
+
+    id                      = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id       = Column(String(36), ForeignKey('patient_records.id'))
+    problem_name            = Column(String(255), nullable=False)
+    problem_note            = Column(String(255), nullable=False)
+    active_status           = Column(String(255), nullable=False)
+    date_occured            = Column(Date, nullable=False)
+    date_resolved           = Column(Date, nullable=True)
+    created_at              = Column(DateTime, default=text('NOW()'))
+    updated_at              = Column(DateTime, onupdate=text('NOW()'))
+    
+    problemFK               = relationship('Record', back_populates="problemrecordFK")
+
+    # Diagnosis Model
+class Diagnosis(Base):
+    __tablename__ = 'diagnosis'
+
+    id      = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id = Column(String(36), ForeignKey('patient_records.id'))
+    doc_id            = Column(String(36), ForeignKey('doctors.id'))
+    diagnosis               = Column(String(255), nullable=False)
+    description             = Column(String(255), nullable=False)
+    
+
+    docdiagnosisFK     = relationship('Doctor', back_populates="diagnosisdocFK")
+    diagnosisrecFK     = relationship('Record', back_populates="diagnosisrecordFK")
+
+    # Progess Notes Model
+class ProgressNote(Base):
+    __tablename__ = 'progress_notes'
+
+    id        = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id       = Column(String(36), ForeignKey('patient_records.id'))
+    # progress_note_id    =  Column(String(36), ForeignKey('progress_notes.progress_note_id'))
+    doc_id                  =  Column(String(36), ForeignKey('doctors.id'))
+    reason_for_consultation = Column(String(255), nullable=False)
+    physical_examination    = Column(String(255), nullable=False)
+    impression              = Column(String(255), nullable=False)
+    recommendation          = Column(String(255), nullable=False)
+    consultation_date        = Column(Date, nullable=True)
+    next_appointment        = Column(Date, nullable=True)
+    created_at              = Column(DateTime, default=text('NOW()'))
+    updated_at              = Column(DateTime, onupdate=text('NOW()'))
+    
+    progressnoteFK          = relationship('Record', back_populates="progressnoterecordFK")
+    docentryFK              = relationship('Doctor',back_populates="progressnoteFK")
+
+    # Call Log Model
+class CallLog(Base):
+    __tablename__ = 'patient_call_logs'
+
+    id     = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id       = Column(String(36), ForeignKey('patient_records.id'))
+
+    call_logFK              = relationship('Record', back_populates="call_logrecordFK")
+    logsFK                  = relationship('CallLogDetail', back_populates="call_logsFK")
+
+    # Call Log Detail Model
+class CallLogDetail(Base):
+    __tablename__ = 'patient_call_log_details'
+
+    id     = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_call_log_id    = Column(String(36), ForeignKey('patient_call_logs.id'))
+    call_log_date          = Column(Date, nullable=False)
+    contact_first_name     = Column(String(255), nullable=False)
+    contact_last_name      = Column(String(255), nullable=False)
+    contact_phone          = Column(String(255), nullable=False)
+    call_details           = Column(String(255), nullable=False)
+    follow_up_date         = Column(Date, nullable=True)
+    created_at             = Column(DateTime, default=text('NOW()'))
+    updated_at             = Column(DateTime, onupdate=text('NOW()'))
+
+    call_logsFK            = relationship('CallLog', back_populates="logsFK")
+
+    # Allergy Model
+class Allergy(Base):
+    __tablename__ = 'allergies'
+
+    id             = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id      = Column(String(36), ForeignKey('patient_records.id'))
+    allergen               = Column(String(255), nullable=True)
+    reaction               = Column(String(255), nullable=True)
+    severity               = Column(String(255), nullable=True)
+    comment                = Column(String(255), nullable=True)
+    created_at             = Column(DateTime, default=text('NOW()'))
+    updated_at             = Column(DateTime, onupdate=text('NOW()'))
+
+    allergiesFK            = relationship('Record', back_populates="record_allergyFK")
+
+    # Immunization Model
+class Immunization(Base):
+    __tablename__ = 'immunizations'
+
+    id        = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id      = Column(String(36), ForeignKey('patient_records.id'))
+    vaccine                = Column(String(255), nullable=True)
+    type                   = Column(String(255), nullable=True)
+    date_given             = Column(Date, nullable=True)
+    administered_by        = Column(String(255), nullable=True)
+    created_at             = Column(DateTime, default=text('NOW()'))
+    updated_at             = Column(DateTime, onupdate=text('NOW()'))
+
+    immunizationsFK        = relationship('Record', back_populates="record_immunizationFK")
+
+    # Medication Model
+class Medication(Base):
+    __tablename__ = 'medications'
+
+    id          = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id      = Column(String(36), ForeignKey('patient_records.id'))
+    drug_name              = Column(String(255), nullable=True)
+    dosage                 = Column(String(255), nullable=True)
+    route                  = Column(String(255), nullable=True)
+    frequency              = Column(String(255), nullable=True)
+    quantity               = Column(String(255), nullable=True)
+    refill                 = Column(String(255), nullable=True)
+    instructions           = Column(String(255), nullable=True)
+    start_date             = Column(Date, nullable=True)
+    end_date               = Column(Date, nullable=True)
+    medication_status      = Column(String(255), nullable=True, default="Active")
+    created_at             = Column(DateTime, default=text('NOW()'))
+    updated_at             = Column(DateTime, onupdate=text('NOW()'))
+
+    medicationsFK          = relationship('Record', back_populates="record_medicationFK")
+
+    # Attachment Model
+class Attachment(Base):
+    __tablename__ = 'attachments'
+
+    id          = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_record_id      = Column(String(36), ForeignKey('patient_records.id'))
+    attachment             = Column(String(255), nullable=True)
+    type                   = Column(String(255), nullable=True)
+    created_at             = Column(DateTime, default=text('NOW()'))
+    updated_at             = Column(DateTime, onupdate=text('NOW()'))
+
+    attachmentsFK          = relationship('Record', back_populates="record_attachmentFK")
+    
+    # Medical Request Model
+class MedicalRequest(Base):
+    __tablename__ = 'medical_requests'
+
+    id                      = Column(String(36), primary_key=True, default=text('UUID()'))
+    patient_id              = Column(String(36), ForeignKey('patient_registration.id'))
+    request_information     = Column(String(255), nullable=True)
+    disclosure_reason       = Column(String(255), nullable=True)
+    delivery                = Column(String(255), nullable=True)
+    email                   = Column(String(255), nullable=True)
+    requested_file          = Column(String(255), nullable=True)
+    review_reason           = Column(String(255), nullable=True)
+    active_status           = Column(String(255), nullable=False, default="Pending")
+    created_at              = Column(DateTime, nullable=True, default=text('NOW()'))
+    updated_at              = Column(DateTime, nullable=True, onupdate=text('NOW()'))
+
+    # reviewbyFK = relationship('User', back_populates='requestreviewFK')
+    # requesterFK = relationship('Patient', back_populates='patientrequestFK')
 
 
 # ! HUMAN RESOURCE

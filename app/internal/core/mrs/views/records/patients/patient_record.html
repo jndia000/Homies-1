@@ -1,0 +1,279 @@
+<!-- Apply layout from base.html -->
+{%extends 'base/base.html'%}
+
+<!-- page title -->
+{%block title%}
+    <!-- Toastr -->
+    <!-- <link rel="stylesheet" href="{{url_for('plugins', path='toastr/toastr.min.css')}}"> -->
+    <title>Patient Record | Hospital Management System</title>
+{%endblock%}
+
+<!-- side nav -->
+{%block sidenav%}
+<!-- Module Name -->
+<li class="nav-header font-weight-bold text-wrap">MEDICAL RECORD SYSTEM</li>
+            
+    <li class="nav-header">CORE</li>
+        <li class="nav-item">
+            <a href="/mrs/records//dashboard" class="nav-link">
+                <i class="nav-icon fas fa-chart-line"></i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+
+    <li class="nav-header">MEDICAL RECORD</li>
+        <li class="nav-item">
+            <a href="/mrs/records/patients" class="nav-link active">
+                <i class="nav-icon fas fa-procedures"></i>
+                <p>Patient Record</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/mrs/records/requests" class="nav-link">
+                <i class="nav-icon fas fa-paper-plane"></i>
+                <p>Medical Request</p>
+            </a>
+        </li>
+<!-- <li class="nav-header">LOGS</li>
+          <li class="nav-item">
+            <a href="/patientcalllogs" class="nav-link">
+              <i class="nav-icon fas fa-phone"></i>
+              <p>Patient Call Log</p>
+            </a>
+          </li> -->
+    <!-- <li class="nav-header">ADMINISTRATOR</li>
+        <li class="nav-item">
+            <a href="/backup" class="nav-link">
+                <i class="nav-icon fas fa-database"></i>
+                <p>Backup Database</p>
+            </a>
+        </li> -->
+{%endblock%}
+
+<!-- main content -->
+{%block content%}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+      <div class="container-fluid">
+          <div class="row mb-2">
+
+              <!-- Title -->
+              <div class="col-sm-6">
+                  <h1>Patient Record</h1>
+              </div>
+
+              <!-- Breadcrumb -->
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="/patientRecord">Patient Records</a></li>
+                      <li class="breadcrumb-item active">View Patient Record</li>
+                  </ol>
+              </div>
+              <!-- / breadcrumb -->
+          </div>
+      </div>
+      <!-- /.container-fluid -->
+</section>
+<!-- /.content-header -->
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-12">
+                <!-- /**
+* ===========================================================================
+* * DEMOGRAPHICS
+* ===========================================================================
+*/ -->   
+<div class="tab-pane card card-primary card-outline" id="demographics_tab" 
+role="tabpanel" aria-labelledby="custom-tab-demographics">
+<div class="card-header">
+    <h3 class="card-title right-tab">Demographics</h3>
+    <span id="action_button"></span>   
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class = "col-4">
+            <div class="card-body box-profile">
+                <div class="text-center">
+                    <i class="fas fa-user fa-10x"></i>
+                </div>
+
+                <h3 class="profile-username text-center"><span id="patient_name"></span></h3>
+
+                <p class="text-muted text-center">Patient</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Birthdate</b> <a class="float-right"><span id="patient_bday"></span></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Contact Number</b> <a class="float-right"><span id="patient_contact"></span></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Address</b> <a class="float-right"><span id="patient_address"></span></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Guardian</b> <a class="float-right"><span id="patient_guardian"></span></a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+        <div class = "col-8">
+            <!-- Gender, Bloodtype -->
+            <div class = "row p-5">
+            <div class="col-12 col-sm-6">
+                <div class="info-box shadow-none">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center"><i class = "fas fa-venus-mars fa-3x pink-color"></i></span>
+                    <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_gender"></span></h5>
+                    <p class="text-muted text-center">Gender</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="info-box shadow-none">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center"><i class="fas fa-droplet fa-3x red-color"></i></span>
+                    <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_blood_type"></h5>
+                        <p class="text-muted text-center">Blood Type</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- HEIGHT, WEIGHT, BMI -->
+            <div class = "row p-5">
+                <div class="col-12 col-sm-4">
+                    <div class="info-box shadow-none">
+                      <div class="info-box-content">
+                        <span class="info-box-text text-center"><i class="fas fa-ruler-vertical fa-3x green-color"></i></span>
+                        <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_height"></span>cm</h5>
+                        <p class="text-muted text-center">Height</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="info-box shadow-none">
+                      <div class="info-box-content">
+                        <span class="info-box-text text-center"><i class="fa-solid fa-weight-scale fa-3x orange-color"></i></span>
+                        <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_weight"></span>kg</h5>
+                            <p class="text-muted text-center">Weight</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <div class="info-box shadow-none">
+                      <div class="info-box-content">
+                        <span class="info-box-text text-center"><i class="fas fa-scale-balanced fa-3x brown-color"></i></span>
+                        <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_bmi_status"></span></h5>
+                        <h5 class="info-box-number text-center text-muted mb-0"><span id="patient_bmi"></span></h5>
+                        <p class="text-muted text-center">BMI</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+      </div>
+</div>
+<!-- /.card-body -->
+</div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+
+<!-- /.content-wrapper -->
+
+
+
+
+
+
+{%endblock%}
+
+{%block scripts%}
+<!-- Toastr -->
+<!-- <script src="{{url_for('plugins', path='/toastr/toastr.min.js')}}"></script> -->
+
+<!-- medications -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/medications.js')}}"></script> -->
+<!-- allergy -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/allergy.js')}}"></script> -->
+
+<!-- immunization -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/immunization.js')}}"></script> -->
+
+<!-- attachment -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/attachment.js')}}"></script> -->
+
+<!-- medical history -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/medicalHistory.js')}}"></script> -->
+
+<!-- medical problem -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/medicalProblem.js')}}"></script> -->
+
+<!-- diagnosis -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/medicalDiagnosis.js')}}"></script> -->
+
+<!-- laboratory -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/labResult.js')}}"></script> -->
+
+<!-- Surgery -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/surgery.js')}}"></script> -->
+
+<!-- clinical notes -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/clinicalNotes.js')}}"></script> -->
+
+<!-- -rescription -->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/prescription.js')}}"></script> -->
+
+<!-- medical record -->
+<!-- <script src="{{url_for('src', path='js/internal/core/mrs/recordsAJAX/medicalRecord.js')}}"></script> -->
+
+<!-- patient details-->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/patientDetails.js')}}"></script> -->
+
+<!-- discharge-->
+<!-- <script src="{{'src', path='js/internal/core/mrs/recordsAJAX/patientDischarge.js')}}"></script> -->
+
+<!-- InputMask -->
+<!-- <script src="{{url_for('plugins', path='/inputmask/jquery.inputmask.min.js')}}"></script> -->
+<!-- <script src="{{url_for('plugins', path='/inputmask/jquery.inputmask.min.js')}}"></script> -->
+<!-- <script src="{{url_for('static', path='/plugins/moment/moment.min.js')}}"></script> -->
+<!-- <script src="{{url_for('static', path='/plugins/inputmask/jquery.inputmask.min.js')}}"></script> -->
+
+<!-- Select2 -->
+<!-- <script src="{{url_for('static', path='/plugins/select2/js/select2.full.min.js')}}"></script> -->
+<script>
+
+$('.select2').select2()
+
+</script>
+<script>
+    //Money Euro
+    $(":input").inputmask();
+    $("#patient_phone").inputmask({"mask": "(9999) 999-9999"});
+
+    $(function () {
+  bsCustomFileInput.init();
+
+  $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+});
+</script>
+
+ 
+ {%endblock%}
+
+

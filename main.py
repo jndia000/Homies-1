@@ -35,6 +35,10 @@ app.mount('/internal', internalApp)
 from app.internal.core.vms.app import VMS
 app.mount('/vms', VMS)
 
+# ? Medical Records
+from app.internal.core.mrs.app import MRS
+app.mount('/mrs', MRS)
+
 
 # ! HUMAN RESOURCE
 
