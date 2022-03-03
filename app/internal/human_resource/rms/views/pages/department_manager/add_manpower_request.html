@@ -1,0 +1,280 @@
+{% extends "pages/department_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header (Page header) #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Add Manpower Request Form #}
+    <section class="content px-3">
+
+        {# Loader #}
+        <div class="card card-primary card-outline" id="addManpowerRequestFormLoader">
+            <div class="card-header">
+                <div class="skeleton-loader w-50 m-0"></div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="skeleton-loader w-25"></div>
+                            <div class="skeleton-loader" style="height: 35px"></div>
+                        </div>
+                    </div>
+                    
+                    {% for i in range(4) %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="skeleton-loader w-50"></div>
+                                <div class="skeleton-loader" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% for i in range(2) %}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="skeleton-loader"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader" style="height: 25rem"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+
+        {# Form #}
+        <form class="card card-primary card-outline" id="addManpowerRequestForm" style="display: none;">
+
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Create Manpower Request</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                
+                {# Requisition No #}
+                <div class="form-group">
+                    <label for="requisitionNo">Requisition no.</label>
+                    <input type="text" class="form-control" id="requisitionNo" name="requisitionNo" readonly>
+                </div>
+
+                <div class="form-row">
+
+                    {# Vacant Position title #}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="vacantPositionForAdd">
+                                <span>Vacant Position</span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select
+                                name="vacantPosition" 
+                                id="vacantPosition"
+                                class="form-control select2"
+                                style="width: 100%"
+                            ></select>
+                        </div>
+                    </div>
+
+                    {# Nature of Request #}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nature of Request<span class="text-danger"> *</span></label>
+                            <select 
+                                name="requestNature" 
+                                id="requestNature"
+                                class="form-control select2" 
+                                style="width: 100%"
+                            >
+                                <option></option>
+                                <option value="New/Addition">New/Addition</option>
+                                <option value="Replacement">Replacement</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {# No. of Vacancy #}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="staffsNeeded">No. of Staffs needed<span class="text-danger"> *</span></label>
+                            <input 
+                                type="number" 
+                                name="staffsNeeded" 
+                                id="staffsNeeded" 
+                                class="form-control" 
+                                placeholder="Type number of staffs needed here"
+                            >
+                        </div>
+                    </div>
+
+                    {# Employment Type #}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Employment Type <span class="text-danger">*</span></label>
+                            <select 
+                                name="employmentType" 
+                                id="employmentType"
+                                class="form-control select2" 
+                                style="width: 100%"
+                            ></select>
+                        </div>
+                    </div>
+                    
+                    {# Options #}
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="icheck-primary d-inline mr-2">
+                                <input type="checkbox" id="setDeadline">
+                                <label for="setDeadline">Set Deadline</label>
+                            </div>
+                            <div class="icheck-primary d-inline">
+                                <input type="checkbox" id="setSalaryRange">
+                                <label for="setSalaryRange">Set Salary Range</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Deadline #}
+                    <div class="col-lg-4" id="deadlineField" style="display: none">
+                        <div class="form-group">
+                            <label for="deadline">
+                                <span>Deadline</span>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-stopwatch"></i>
+                                    </div>
+                                </div>
+                                <input 
+                                    type="datetime-local" 
+                                    name="deadline" 
+                                    id="deadline" 
+                                    class="form-control" 
+                                    placeholder="Please select a deadline"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8" id="salaryRangeField" style="display: none">
+                        <div class="form-row">
+
+                            {# Minimum Salary #}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="minSalary">
+                                        <span>Minimum Salary <small>per month</small></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <b>&#8369;</b>
+                                            </div>
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            name="minSalary" 
+                                            id="minSalary" 
+                                            class="form-control" 
+                                            min="1"
+                                            step="any"
+                                            placeholder="Type minimum salary here"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# Maximum Salary #}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="maxSalary">
+                                        <span>Maximum Salary <small>per month</small></span>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <b>&#8369;</b>
+                                            </div>
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            name="maxSalary" 
+                                            id="maxSalary" 
+                                            class="form-control" 
+                                            placeholder="Type maximum salary here"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {# Request Description #}
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="requestDescription">Request Description<span class="text-danger"> *</span></label>
+                            <div>
+                                <textarea
+                                    name="requestDescription" 
+                                    id="requestDescription" 
+                                    class="form-control"
+                                    placeholder="Enter job description here..."
+                                ></textarea>
+                            </div>
+                            <div class="small text-danger" id="requestDescriptionInvalidFeedback" style="display: none">Request description is required</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <div class="float-right">
+                    <button type="button" class="btn btn-default" onclick="history.back()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                        <span>Submit</span>
+                        <i class="fas fa-check ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+    
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/department_manager/modals/add_manpower_request_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/department_manager/manpower_requests.js')}}"></script>
+{% endblock %}

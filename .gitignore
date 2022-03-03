@@ -6,4 +6,3 @@ venv
 .vscode
 .DS_Store
 .env
-static/src/files/**

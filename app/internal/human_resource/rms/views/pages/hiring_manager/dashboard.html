@@ -1,0 +1,385 @@
+{% extends "pages/hiring_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Filter #}
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                
+                {# Date Range Filter #}
+                <div class="d-flex">
+                    <div class="form-group mb-0 mr-1">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-default float-right" id="filterDate">
+                                <span class="mr-1" id="selectedFilter">Select date</span>
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white">
+                                    <span id="selectedDate">
+                                        <div class="spinner-border spinner-border-sm"></div>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Refresh Button #}
+                <div>
+                    <button class="btn btn-sm btn-default" onclick="location.reload()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            {# Info Cards #}
+            <div class="row">
+
+                {# Manpower Requests Count #}
+                <div class="col-lg-4">
+                    <div class="small-box" style="background: white;">
+                        <div class="inner">
+                            <h3 class="text-info mb-1" id="manpowerRequestsCountForInfoCard">
+                                <span class="spinner-border"></span>
+                            </h3>
+                            <p class="font-weight-bold">Manpower Requests</p>
+                        </div>
+                        <div class="icon text-info" style="opacity: 50%;">
+                        <i class="fas fa-copy"></i>
+                        </div>
+                        <a href="manpower-requests" class="small-box-footer bg-info">
+                            <span>More info</span>
+                            <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                {# Job Posts Count #}
+                <div class="col-lg-4">
+                    <div class="small-box" style="background: white;">
+                        <div class="inner">
+                            <h3 class="text-success mb-1" id="jobPostsCountForInfoCard">
+                                <span class="spinner-border"></span>
+                            </h3>
+                            <p class="font-weight-bold">Job Posts</p>
+                        </div>
+                        <div class="icon text-success" style="opacity: 50%;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <a href="job-posts" class="small-box-footer bg-success">
+                            <span>More info</span>
+                            <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                {# Applications Count #}
+                <div class="col-lg-4">
+                    <div class="small-box" style="background: white;">
+                        <div class="inner">
+                            <h3 class="text-warning mb-1" id="applicationsCountForInfoCard">
+                                <span class="spinner-border"></span>
+                            </h3>
+                            <p class="font-weight-bold">Applications</p>
+                        </div>
+                        <div class="icon text-warning" style="opacity: 50%;">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <a href="applicants" class="small-box-footer bg-warning">
+                            <span>More info</span>
+                            <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {# Manpower Requests #}
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="card-title">Manpower Requests</h5>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# Manpower Requests Bar Chart #}
+                        <div class="col-md-8">
+                            <p class="font-weight-bold">Manpower Requests</p>
+
+                            <div class="chart">
+                                <canvas id="manpowerRequestsBarChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+
+                        {# Application Status #}
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Manpower Request Status Breakdown</p>
+                            <div class="chart">
+                                <canvas id="manpowerRequestsStatusPieChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-primary">
+                            <i class="fas fa-copy"></i>
+                        </span>
+                        <h5 class="description-header text-primary" id="totalMRCountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">TOTAL MANPOWER REQUESTS</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-warning">
+                            <i class="fas fa-sync-alt"></i>
+                        </span>
+                        <h5 class="description-header text-warning" id="forReviewMRCountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">FOR REVIEW</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-success">
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                        <h5 class="description-header text-success" id="approvedMRCountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">APPROVED</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block">
+                        <span class="description-percentage text-danger">
+                            <i class="fas fa-file-excel"></i>
+                        </span>
+                        <h5 class="description-header text-danger" id="rejectedMRCountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">REJECTED</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Job Posts #}
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="card-title">Job Posts</h5>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Job Posts Status Breakdown</p>
+                            <div class="chart">
+                                <canvas id="jobPostsStatusPieChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="font-weight-bold">Job Posts Created</p>
+
+                            <div class="chart">
+                                <canvas id="jobPostsBarChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+
+                        {# Total Job Posts #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-primary">
+                                <i class="fas fa-briefcase"></i>
+                            </span>
+                            <h5 class="description-header text-primary" id="totalJPCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">TOTAL JOB POSTS</span>
+                            </div>
+                        </div>
+
+                        {# On Going #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-info">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <h5 class="description-header text-info" id="onGoingJPCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">ON GOING</span>
+                            </div>
+                        </div>
+
+                        {# Closed/Ended #}
+                        <div class="col-sm-4">
+                            <div class="description-block border-right">
+                            <span class="description-percentage text-danger">
+                                <i class="fas fa-check-double"></i>
+                            </span>
+                            <h5 class="description-header text-danger" id="endedJPCountForFooter">
+                                <div class="spinner-border spinner-border-sm"></div>
+                            </h5>
+                            <span class="description-text">CLOSED/ENDED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Applications #}
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="card-title">Applications</h5>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# Number of Applications #}
+                        <div class="col-md-8">
+                            <p class="font-weight-bold">Number of Applications</p>
+
+                            <div class="chart">
+                                <canvas id="applicantsLineChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+
+                        {# Application Status #}
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Application Status Breakdown</p>
+                            <div class="chart">
+                                <canvas id="applicationStatusPieChart" style="
+                                    min-height: 250px; 
+                                    height: 250px; 
+                                    max-height: 250px; 
+                                "></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-primary">
+                            <i class="fas fa-user-tie"></i>
+                        </span>
+                        <h5 class="description-header text-primary" id="totalACountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">TOTAL APPLICATIONS</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-warning">
+                            <i class="fas fa-users-cog mr-1"></i>
+                        </span>
+                        <h5 class="description-header text-warning" id="onProcessACountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">ON PROCESS</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block border-right">
+                        <span class="description-percentage text-secondary">
+                            <i class="fas fa-file-signature"></i>
+                        </span>
+                        <h5 class="description-header text-secondary" id="contractSignedACountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">CONTRACT SIGNED</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="description-block">
+                        <span class="description-percentage text-danger">
+                            <i class="fas fa-times-circle"></i>
+                        </span>
+                        <h5 class="description-header text-danger" id="rejectedACountForFooter">
+                            <div class="spinner-border spinner-border-sm"></div>
+                        </h5>
+                        <span class="description-text">REJECTED</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/hiring_manager/dashboard.js')}}"></script>
+{% endblock %}

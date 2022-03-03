@@ -1,0 +1,128 @@
+{% extends "pages/department_head/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Manpower Requests Analytics #}
+            <div class="row" id="manpowerRequestAnalytics">
+
+                {# Total Manpower Requests #}
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-copy"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Manpower Requests</span>
+                            <span class="info-box-number" id="totalManpowerRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Total Manpower Requests #}
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="fas fa-file-signature"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">For signature</span>
+                            <span class="info-box-number" id="forSignatureCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Signed Requests #}
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="fas fa-check"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Signed Requests</span>
+                            <span class="info-box-number" id="signedRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Rejected Requests #}
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-file-excel"></i></span>
+        
+                        <div class="info-box-content">
+                            <span class="info-box-text">Rejected Requests</span>
+                            <span class="info-box-number" id="rejectedRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Manpower Request Card #}
+            <div class="card card-primary card-outline">
+
+                {# Card Header #}
+                <div class="card-header">
+                    <h3 class="card-title">Lists of Manpower Requests</h3>
+                </div>
+
+                {# Card Body #}
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="manpowerRequestDT" class="table table-bordered table-hover w-100" width="100" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="sr-only">Date Added</div>
+                                    </th>
+                                    <th>Requisition No.</th>
+                                    <th>Staffs Needed</th>
+                                    <th>Nature of Request</th>
+                                    <th>Status</th>
+                                    <th>Date Requested</th>
+                                    <th>
+                                        <span class="d-md-none d-inline-block">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7">
+                                        {%  include "components/loading_spinner.html" %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block page_modals %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/department_head/manpower_requests.js')}}"></script>
+{% endblock %}

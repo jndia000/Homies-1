@@ -1,0 +1,232 @@
+{% extends "pages/hiring_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                {# Applicant Details #}
+                <div class="col-md-4">
+                    <div class="card card-primary card-outline" id="applicantDetailsLoader">
+                        <div class="card-body box-profile">
+
+                            <div class="d-flex flex-column justify-content-center align-items-center mb-2">
+                                <div class="skeleton-loader w-75" style="height: 35px"></div>
+                                <div class="skeleton-loader sm w-50"></div>
+                            </div>
+
+                            {# Applicant Details #}
+                            <table class="table">
+                                {% for i in range(4) %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="skeleton-loader mr-2" style="height: 22px; width: 22px"></div>
+                                                <div class="skeleton-loader w-75"></div>
+                                            </div>
+                                            <div class="skeleton-loader w-75 ml-3"></div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="skeleton-loader w-75" style="height: 28px"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card card-primary card-outline" id="applicantDetails" style="display: none">
+                        <div class="card-body box-profile">
+
+                            <div class="text-center">
+                                <h3 class="profile-username mb-0" id="intervieweeName"></h3>
+                                <p class="text-secondary small">Candidate/Applicant</p>
+                            </div>
+
+                            {# Applicant Details #}
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div style="width: 1.75rem" class="text-secondary">
+                                                <i class="fas fa-user-tie"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-weight-bold">Applying for</div>
+                                                <div id="applyingFor"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div style="width: 1.75rem" class="text-secondary">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-weight-bold">Email</div>
+                                                <div id="applicantEmail"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div style="width: 1.75rem" class="text-secondary">
+                                                <i class="fas fa-phone-alt"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-weight-bold">Contact Number</div>
+                                                <div id="applicantContactNumber"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div style="width: 1.75rem" class="text-secondary">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-weight-bold">Date Applied</div>
+                                                <div id="appliedDate"></div>
+                                                <div id="appliedTime"></div>
+                                                <div id="appliedAtHumanized"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            class="btn btn-sm btn-block btn-secondary"
+                                            id="viewResumeBtn"
+                                        >
+                                            <span>View Resume</span>
+                                            <i class="fas fa-file-alt ml-1"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {# Interview Scoresheet #}
+                <div class="col-md-8">
+                    <form class="card card-primary card-outline" id="interviewScoresheetForm">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Interview Scoresheet</h3>                                    
+    
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            {# General Questions #}
+                            <label>General Questions</label>
+                            <table id="generalInterviewQuestionsForIntervieweeDT" class="table table-bordered w-100 mb-3" width="100" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th class="text-center" style="width: 7.5rem">Score</th>
+                                        <th style="width: 3rem"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="generalInterviewQuestionsForIntervieweeDTBody">
+                                    <tr>
+                                        <td colspan="2">
+                                            {%  include "components/loading_spinner.html" %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            {# Added Questions #}
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <label>Added Questions</label>
+                                </div>
+                                <div>
+                                    <button 
+                                        type="button"
+                                        class="btn btn-sm btn-primary" 
+                                        data-toggle="modal" 
+                                        data-target="#addInterviewQuestionModal"
+                                    >
+                                        <span>Add question</span>
+                                        <i class="fas fa-plus ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="addedInterviewQuestionsDT" class="table table-bordered w-100 mb-3" width="100" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th class="text-center" style="width: 7.5rem">Score</th>
+                                        <th style="width: 3rem"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="addedInterviewQuestionsDTBody">
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="text-center py-5">
+                                                <h3>No additional question yet</h3>
+                                                <div class="text-secondary">Your added question will display here</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer text-right">
+                            <button type="button" class="btn btn-default" onclick="history.back()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Save</span>
+                                <i class="fas fa-check ml-1"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/hiring_manager/modals/interview_scoresheet_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/hiring_manager/interview.js')}}"></script>
+{% endblock %}

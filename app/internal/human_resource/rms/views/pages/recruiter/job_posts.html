@@ -1,0 +1,127 @@
+{% extends "pages/recruiter/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Job Posts Analytics #}
+            <div class="row" id="jobPostsAnalytics">
+
+                {# Total Job Posts #}
+                <div class="col-md-4 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-primary"><i class="fas fa-briefcase"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Job Posts</span>
+                            <span class="info-box-number" id="totalJobPostsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                {# On going Job Posts #}
+                <div class="col-md-4 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-search"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ongoing Job Posts</span>
+                            <span class="info-box-number" id="ongoingJobPostsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Ended Job Post #}
+                <div class="col-md-4 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-check-double"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ended Job Posts</span>
+                            <span class="info-box-number" id="endedJobPostsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Job Posts Card #}
+            <div class="card card-primary card-outline">
+
+                {# Card Header #}
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Lists of Job Posts</h3>
+
+                        <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                {# Card Body #}
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table 
+                            id="jobPostsDT" 
+                            class="table table-bordered table-hover w-100" 
+                            width="100" 
+                            cellspacing="0"
+                        >
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="sr-only">Date Added</div>
+                                    </th>
+                                    <th>Manpower Request</th>
+                                    <th>Vacant Position</th>
+                                    <th>Applicants</th>
+                                    <th>Application Status</th>
+                                    <th>Open until</th>
+                                    <th class="text-center">
+                                        <div class="sr-only">Actions</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center py-5 wait">
+                                            <div class="spinner-border text-primary my-3" role="status">
+                                                <span class="sr-only">Loading ...</span>
+                                            </div>
+                                            <div class="text-secondary">Loading ...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/recruiter/modals/job_posts_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/recruiter/job_posts.js')}}"></script>
+{% endblock %}

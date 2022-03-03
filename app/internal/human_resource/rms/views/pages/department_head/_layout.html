@@ -1,0 +1,23 @@
+{% extends "layouts/admin.html" %}
+
+
+{% block topbar %}
+    {% include "pages/department_head/components/topbar.html" %}
+{% endblock %}
+
+
+{% block sidebar %}
+    {% include "pages/department_head/components/sidebar.html" %}
+{% endblock %}
+
+
+{% block modals %}
+    {% block page_modals %}{% endblock %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/department_head/info.js')}}"></script>
+
+    {% block page_scripts %}{% endblock %}
+{% endblock %}

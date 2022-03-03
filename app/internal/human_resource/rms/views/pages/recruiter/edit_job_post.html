@@ -1,0 +1,306 @@
+{% extends "pages/recruiter/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Content #}
+    <section class="content px-3">
+        
+        {# Edit Job Post Form Loader #}
+        <div class="form-row" id="editJobPostFormLoader">
+
+            {# Form #}
+            <div class="col-lg-8">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="skeleton-loader w-50 m-0"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="skeleton-loader w-50"></div>
+                                    <div class="skeleton-loader" style="height: 50rem"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="skeleton-loader w-50"></div>
+                                    <div class="skeleton-loader input"></div>
+                                    <div class="skeleton-loader input"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+
+            {# Details #}
+            <div class="col-lg-4">
+
+                {# Job Post Summary #}
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="skeleton-loader w-50 m-0"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="skeleton-loader w-50"></div>
+                            <div class="skeleton-loader"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Job Post Timeline #}
+                <div class="timeline wait">
+                    <div class="time-label">
+                        <div class="skeleton-loader mb-0 shadow-sm w-75" style="height: 30px"></div>
+                    </div>
+                    <div>
+                        <i class="fas fa-circle bg-secondary"></i>
+                        <div class="timeline-item">
+                            
+                            <div class="timeline-header">
+                                <div class="skeleton-loader sm w-50 mb-0"></div>
+                            </div>
+
+                            <div class="timeline-body">
+                                <div class="small">
+                                    <div class="skeleton-loader sm"></div>
+                                    <div class="skeleton-loader sm w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fas fa-circle bg-secondary"></i>
+                        <div class="timeline-item">
+                            
+                            <div class="timeline-header">
+                                <div class="skeleton-loader sm w-50 mb-0"></div>
+                            </div>
+
+                            <div class="timeline-body">
+                                <div class="small">
+                                    <div class="skeleton-loader sm"></div>
+                                    <div class="skeleton-loader sm w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <i class="fas fa-clock bg-secondary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Edit Job Post Form Container #}
+        <div class="form-row" id="editJobPostFormContainer" style="display: none">
+
+            {# Create Job Post Form #}
+            <div class="col-lg-8">
+                <form class="card card-primary card-outline" id="editJobPostForm">
+    
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-title">Edit Job Post</div>
+    
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-sm btn-default" onclick="history.back()">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <input type="hidden" id="jobPostID" name="jobPostID">
+
+                        {# Job Category #}
+                        <div class="form-group">
+                            <label for="jobCategory">Job Category</label>
+                            <select
+                                name="jobCategory" 
+                                id="jobCategory"
+                                class="form-control select2"
+                                style="width: 100%"
+                            ></select>
+                        </div>
+    
+                        {# Job Description #}
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description <span class="text-danger">*</span></label>
+                            <div>
+                                <textarea
+                                    name="jobDescription" 
+                                    id="jobDescription" 
+                                    class="form-control"
+                                    placeholder="Enter job description here..."
+                                ></textarea>
+                            </div>
+                            <div class="small text-danger" id="jobDescriptionInvalidFeedback" style="display: none">Job description is required</div>
+                        </div>
+
+                        <div class="form-row">
+
+                            {# Options #}
+                            <div class="col-lg-6">
+                                <label>Options</label>
+
+                                <div class="form-group">
+
+                                    {# Make Salary Range Visible #}
+                                    <div class="mb-2" id="salaryRangeField">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="salaryRangeIsVisible" name="salaryRangeIsVisible">
+                                            <label for="salaryRangeIsVisible">Make Salary Range Visible</label>
+                                        </div>
+                                    </div>
+                                    
+                                    {# Set Expiration Date #}
+                                    <div class="mb-2">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="expirationDate">
+                                            <label for="expirationDate">Set Expiration Date</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {# Open until #}
+                            <div class="col-lg-6" id="openUntilField" style="display: none">
+                                <div class="form-group">
+                                    <label for="openUntil">Open until</label>
+                                    <input 
+                                        type="datetime-local" 
+                                        class="form-control"
+                                        id="openUntil"
+                                        name="openUntil"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="card-footer">
+                        <div class="float-right">
+                            <button type="button" class="btn btn-default" onclick="history.back()">Cancel</button>
+                            <button type="submit" class="btn btn-info" id="saveBtn">
+                                <span>Save</span>
+                                <i class="fas fa-check ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            {# Job Post Details & Manpower Request #}
+            <div class="col-lg-4">
+
+                {# Manpower Request Summary #}
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-title">Manpower Request</div>
+    
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-sm btn-default" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table w-100">
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Vacant Position</h6>
+                                    <div id="vacantPositionForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Staffs Needed</h6>
+                                    <div id="staffsNeededForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Employment Type</h6>
+                                    <div id="employmentTypeForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Salary Range</h6>
+                                    <div id="salaryRangeForSummary"></div>
+                                    <div id="salaryRangeStatus"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="mb-1">Deadline</h6>
+                                    <div id="deadlineForSummary"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button 
+                                        class="btn btn-sm btn-secondary btn-block"
+                                        data-toggle="modal"
+                                        data-target="#viewManpowerRequestModal"
+                                    >View Full Details</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                {# Job Post Timeline #}
+                <div class="timeline" id="jobPostTimeline"></div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/recruiter/modals/edit_job_post_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/recruiter/job_posts.js')}}"></script>
+{% endblock %}

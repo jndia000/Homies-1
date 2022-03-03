@@ -17,7 +17,7 @@ publicApp.include_router(authRoute.router)
 
 # * Career Routers
 # ? Recruitment Public API
-from app.internal.human_resource.recruitment.routers.api import careers_apiRoute
+from app.internal.human_resource.rms.routers.api import careers_apiRoute
 publicApp.include_router(careers_apiRoute.router)
 
 
@@ -33,5 +33,5 @@ publicApp.include_router(homeRoute.router)
 
 # * Careers Routers
 # ? Recruitment Public Portal
-from app.internal.human_resource.recruitment.routers.web import careers_webRoute
+from app.internal.human_resource.rms.routers.web import careers_webRoute
 publicApp.include_router(careers_webRoute.router)

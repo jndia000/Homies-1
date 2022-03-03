@@ -1,0 +1,137 @@
+{% extends "pages/hiring_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            {# Manpower Requests Analytics #}
+            <div class="row" id="manpowerRequestAnalytics">
+
+                {# Total Manpower Requests Count #}
+                <div class="col-md-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-copy"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Manpower Requests</span>
+                            <span class="info-box-number" id="totalManpowerRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# For Review Requests #}
+                <div class="col-md-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="fas fa-sync-alt"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">For Review and Approval</span>
+                            <span class="info-box-number" id="forReviewRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Approved Requests #}
+                <div class="col-md-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Approved Requests</span>
+                            <span class="info-box-number" id="approvedRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {# Rejected Requests #}
+                <div class="col-md-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="fas fa-file-excel"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Rejected Requests</span>
+                            <span class="info-box-number" id="rejectedRequestsCount">
+                                <span class="spinner-border spinner-border-sm"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Manpower Requests Table #}
+            <div class="card card-primary card-outline">
+
+                {# Card Header #}
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Lists of Manpower Requests</h3>
+    
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-sm btn-default" data-card-widget="maximize">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {# Card Body #}
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="manpowerRequestDT" class="table table-bordered table-hover w-100" width="100" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="sr-only">Date Added</div>
+                                    </th>
+                                    <th>Requisition No.</th>
+                                    <th>Position Title</th>
+                                    <th>Staffs Needed</th>
+                                    <th>Status</th>
+                                    <th>Date Requested</th>
+                                    <th class="text-center">
+                                        <span class="d-md-none d-inline-block">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7">
+                                        {%  include "components/loading_spinner.html" %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/hiring_manager/modals/manpower_requests_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/rms/recruitment/hiring_manager/manpower_requests.js')}}"></script>
+{% endblock %}
+

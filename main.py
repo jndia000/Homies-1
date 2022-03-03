@@ -32,14 +32,14 @@ app.mount('/internal', internalApp)
 # ! HOSPITAL CORE
 
 # ? Visitors
-from app.internal.core.visitors.app import VMS
+from app.internal.core.vms.app import VMS
 app.mount('/vms', VMS)
 
 
 # ! HUMAN RESOURCE
 
 # ? Recruitment
-from app.internal.human_resource.recruitment.app import RMS
+from app.internal.human_resource.rms.app import RMS
 app.mount('/rms', RMS)
 
 

@@ -2,9 +2,9 @@
     <div class="container">
 
         {# Brand #}
-        <a href="/" class="navbar-brand order-0">
+        <a href="#" class="navbar-brand order-0">
             <img 
-                src="{{url_for('dist', path='/img/AdminLTELogo.png')}}" 
+                src="{{BASE_URL_WEB}}static/dist/img/AdminLTELogo.png" 
                 alt="HoMIES" 
                 class="brand-image img-circle" 
                 style="opacity: .8"
@@ -26,22 +26,21 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
 
-                <!-- Medical Services -->
+                {# Medical Services #}
                 <li class="nav-item dropdown">
-                    <a
-                        id="dropdownSubMenu1"
-                        href="#"
+                    <a 
+                        id="dropdownSubMenu1" 
+                        href="#" 
                         data-toggle="dropdown"
                         class="nav-link dropdown-toggle"
-                        >Medical Services</a
-                    >
+                    >Medical Services</a>
 
                     <ul class="dropdown-menu border-0 shadow">
                         <li><a href="#" class="dropdown-item">Find a Doctor</a></li>
                     </ul>
                 </li>
 
-                <!-- Patient & Visitor -->
+                {# Patient & Visitor #}
                 <li class="nav-item dropdown">
                     <a
                         id="dropdownSubMenu1"
@@ -81,42 +80,35 @@
                     </ul>
                 </li>
 
-                <!-- Careers -->
+                {# Careers #}
                 <li class="nav-item">
                     <a href="/careers" class="nav-link">Careers</a>
                 </li>
-
-                <!-- About Us -->
+                
+                {# About Us #}
                 <li class="nav-item dropdown">
-                    <div
+                    <a
                         role="button"
                         data-toggle="dropdown"
                         class="nav-link dropdown-toggle"
-                    >
-                        About Us
-                    </div>
-                    <ul
-                        aria-labelledby="dropdownSubMenu1"
-                        class="dropdown-menu border-0 shadow"
-                    >
-                        <li>
-                            <a href="/vision-and-mission" class="dropdown-item">Vision & Mission</a>
-                        </li>
-                        <li><a href="/history" class="dropdown-item">History</a></li>
+                    >About Us</a>
+
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="#" class="dropdown-item">Vision & Mission</a></li>
+                        <li><a href="#" class="dropdown-item">History</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="/data-privacy" class="dropdown-item">Data Privacy</a></li>
-                        <li>
-                            <a href="/terms-and-conditions" class="dropdown-item">Terms and Conditions</a>
-                        </li>
-                        <li><a href="/faq" class="dropdown-item">FAQ</a></li>
+                        <li><a href="#" class="dropdown-item">Data Privacy</a></li>
+                        <li><a href="#" class="dropdown-item">Terms and Conditions</a></li>
+                        <li><a href="#" class="dropdown-item">FAQ</a></li>
                     </ul>
                 </li>
+
             </ul>
         </div>
 
         {# Right Navbar Links #}
         <div class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <a href="./login" class="btn btn-outline-primary text-nowrap">
+            <a href="/login" class="btn btn-outline-primary text-nowrap">
                 <span>Log in</span>
                 <i class="fas fa-sign-in-alt ml-1"></i>
             </a>

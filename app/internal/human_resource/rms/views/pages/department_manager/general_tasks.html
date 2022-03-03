@@ -1,0 +1,143 @@
+{% extends "pages/department_manager/_layout.html" %} 
+
+
+{% block content %}
+
+    {# Content Header #}
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>{{ page_title }}</h1>
+            <p class="text-muted">{{ sub_title }}</p>
+        </div>
+    </section>
+
+    {# Main content #}
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="form-row">
+
+                {# Menu List #}
+                <div class="col-md-3">
+
+                    {# Menu List #}
+                    <div class="card card-primary card-outline" id="menu">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Menus</h3>
+    
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-sm btn-default" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column" id="applicantsMenu">
+
+                                {# For new employees link #}
+                                <li class="nav-item">
+                                    <div type="button" id="forNewEmployeesMenu" class="nav-link{% if active_menu == 'for-new-employees' %} text-primary{% endif %}">
+                                        <i class="fas fa-user" style="width: 1.5rem"></i>
+                                        <span>For new employees</span>
+                                        <span 
+                                            class="badge bg-warning float-right" 
+                                            id="forScreeningCount" 
+                                            style="display: none"
+                                        >0</span>
+                                    </div>
+                                </li>
+
+                                {# For the team link #}
+                                <li class="nav-item">
+                                    <div type="button" id="forTheTeamMenu" class="nav-link{% if active_menu == 'for-the-team' %} text-primary{% endif %}">
+                                        <i class="fas fa-users" style="width: 1.5rem"></i>
+                                        <span>For the team</span>
+                                        <span 
+                                            class="badge bg-info float-right" 
+                                            id="forInterviewCount" 
+                                            style="display: none"
+                                        >0</span>
+                                    </div>
+                                </li>
+
+                                {# Department Manager Tasks link #}
+                                <li class="nav-item">
+                                    <div type="button" id="myTasksMenu" class="nav-link{% if active_menu == 'my-tasks' %} text-primary{% endif %}">
+                                        <i class="fas fa-user-tie" style="width: 1.5rem"></i>
+                                        <span>My tasks</span>
+                                        <span 
+                                            class="badge bg-info float-right"
+                                            id="interviewedApplicantsCount" 
+                                            style="display: none"
+                                        >0</span>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                {# General Tasks #}
+                <div class="col-md-9">
+                    <div class="card card-primary card-outline">
+
+                        {# Card Header #}
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="card-title" id="generalTasksTitle"></h3>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary" onclick="addGeneralTask()">
+                                        <span class="d-none d-sm-inline-block">Add new task</span>
+                                        <i class="fas fa-plus ml-sm-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Card Body #}
+                        <div class="card-body">
+                            <table id="generalTasksDT" class="table table-bordered table-hover w-100" width="100" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="sr-only">Date Added</div>
+                                        </th>
+                                        <th>Task Name & Description</th>
+                                        <th>Date Added</th>
+                                        <th class="text-center">
+                                            <div class="sr-only">Actions</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6">
+                                            {%  include "components/loading_spinner.html" %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block page_modals %}
+    {% include "pages/department_manager/modals/onboarding_tasks_modal.html" %}
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script src="{{url_for('src', path='/js/internal/human_resource/rms/department_manager/onboarding.js')}}"></script>
+{% endblock %}

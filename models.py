@@ -240,6 +240,7 @@ class Applicant(Base):
         uselist = False
     )
 
+
 # Department Model
 # Hiram namin sa core human capital
 class Department(Base):
@@ -282,6 +283,7 @@ class Department(Base):
         "SubDepartment",
         back_populates = "main_department"
     )
+
 
 # Employee Model
 # Hiram namin sa core human capital
