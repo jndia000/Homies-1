@@ -27,7 +27,9 @@ def login(
     # Get user credentials
     user_credentials = db.query(InternalUser).filter(
         InternalUser.email == req.username
-    ).join(Employee).join(UserRole).filter(
+    ).join(Employee).filter(
+        InternalUser.id == Employee.user_id
+    ).join(UserRole).filter(
         UserRole.user_id == InternalUser.id
     ).join(Role).filter(
         UserRole.role_id == Role.id

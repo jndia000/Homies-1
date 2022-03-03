@@ -49,18 +49,13 @@ class InternalUser(Base):
     __tablename__ = 'internal_users'
 
     id = Column(String(36), primary_key=True, default=text('UUID()'))
-    employee_id = Column(
-        String(36),
-        ForeignKey('employees.employee_id'),
-        nullable = False
-    )
     email = Column(String(255), nullable=False)
     password = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=text('NOW()'))
     updated_at = Column(DateTime, onupdate=text('NOW()'))
 
     roles = relationship('UserRole', back_populates='user')
-    employee_info = relationship('Employee', back_populates = 'user_credentials')
+    employee_info = relationship('Employee', back_populates = 'user_credentials', uselist=False)
 
 
 class Role(Base):
@@ -298,6 +293,11 @@ class Employee(Base):
         String(36),
         primary_key = True,
         default = text('UUID()')
+    )
+    user_id = Column(
+        String(36), 
+        ForeignKey('internal_users.id'), 
+        nullable=False
     )
     first_name = Column(
         String(255),
